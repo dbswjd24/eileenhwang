@@ -46,6 +46,10 @@ This repository showcases a variety of **Python** and **Java** projects covering
 - **Concepts**: Data structures, generics, iterator pattern.
 
 ---
+## **🛠 Other Projects**
+#### **PathPilot (Pathfinding Algorithm Visualizer) 🛤️**
+A visualizer for shortest path algorithms like Dijkstra and A.*
+- **Concepts**: Graph traversal, priority queues, GUI development.
 
 ## **📩 Contact**
 For questions or discussions, feel free to open an issue on GitHub or reach out.
