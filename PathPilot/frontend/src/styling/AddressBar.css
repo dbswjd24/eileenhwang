@@ -1,0 +1,38 @@
+.address-bar {
+    width: 340px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the children horizontally */
+    background-color: white;
+    padding: 8px 16px; /* Reduced padding */
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+  
+  .back-button {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .address-details {
+    display: flex;
+    align-items: center;
+    text-align: center; /* Center the text */
+  }
+  
+  .address {
+    margin: 0 5px;
+    font-weight: 400;
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+  
+  .arrow {
+    margin: 0 10px;
+  }
