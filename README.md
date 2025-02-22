@@ -1,116 +1,51 @@
-# **Projects Collection**  
+# **🚀 Projects Collection**
+This repository showcases a variety of **Python** and **Java** projects covering topics such as **game development, data structures, algorithms, and cryptography**.
 
-This repository contains various coding projects demonstrating concepts in **Python** and **Java**, including game development, data structures, and algorithm implementations.
 
----
 
-## **📝 Projects Overview**  
+## **📝 Projects Overview**
 
-### **Python Projects**  
-#### **1. The Game of Hog** 🐷  
-- **Description**: A turn-based dice game simulator with strategic decision-making.  
-- **Concepts**: Probability simulation, game logic, higher-order functions.  
-- **How to Run**:  
-  ```bash
-  python3 hog.py
-  ```  
+### **🐍 Python Projects**
+#### **1. The Game of Hog 🐷**
+- **A turn-based dice game simulator with strategic decision-making.**
+- **Concepts**: Probability simulation, game logic, higher-order functions.
 
-#### **2. Typing Autocorrect ("Cats")** 🐱  
-- **Description**: A program that measures typing speed and includes an autocorrect feature.  
-- **Concepts**: String manipulation, functional programming, recursion.  
-- **How to Run**:  
-  ```bash
-  python3 cats.py
-  ```  
+#### **2. Typing Autocorrect ("Cats") 🐱**
+- **A program that measures typing speed and includes an autocorrect feature.**
+- **Concepts**: String manipulation, functional programming, recursion.
 
-#### **3. Ants vs. SomeBees (Tower Defense Game)** 🐜🐝  
-- **Description**: A strategic tower defense game where ants fight against invading bees.  
-- **Concepts**: Object-oriented programming (OOP), inheritance, game logic.  
-- **How to Run**:  
-  ```bash
-  python3 ants_gui.py
-  ```  
+#### **3. Ants vs. SomeBees (Tower Defense Game) 🐜🐝**
+- **A strategic tower defense game where ants defend against invading bees.**
+- **Concepts**: Object-oriented programming, inheritance, game logic.
 
-#### **4. Scheme Interpreter** 🌀  
-- **Description**: An interpreter for a subset of the Scheme programming language.  
-- **Concepts**: Parsing, recursion, environment model, tree data structures.  
-- **How to Run**:  
-  ```bash
-  python3 scheme.py
-  ```  
+#### **4. Scheme Interpreter 🌀**
+- **An interpreter for a subset of the Scheme programming language.**
+- **Concepts**: Parsing, recursion, environment model, tree data structures.
+
+#### **5. Chrome Dinosaur Game 🦖**
+- **A Python-based recreation of the Chrome Dinosaur game featuring jump and obstacle mechanics.**
+- **Concepts**: Game development, physics simulation.
 
 ---
 
-### **Java Projects**  
-#### **1. 2048 Game** 🎮  
-- **Description**: A playable version of the 2048 puzzle game.  
-- **Concepts**: 2D arrays, game logic, GUI interaction.  
-- **How to Run**:  
-  - Run `Main.java` in an IDE like IntelliJ.  
+### **☕ Java Projects**
+#### **1. Build Your Own World (BYOW) 🌎**
+- **A procedurally generated world exploration game.**
+- **Concepts**: Randomized world generation, user interface design.
 
-#### **2. Double-Ended Queue (Deque) Implementations** 🔄  
-- **Description**: Implementations of a **Linked List-based Deque** and an **Array-based Deque**.  
-- **Concepts**: Circular arrays, doubly linked lists, dynamic resizing.  
-- **Key Implementations**:  
-  - `LinkedListDeque.java`: Implements a deque using a circular doubly linked list.  
-  - `ArrayDeque.java`: Implements a deque using a dynamic array.  
-- **How to Run Tests**:  
-  ```bash
-  javac LinkedListDequeTest.java
-  java LinkedListDequeTest
-  ```  
+#### **2. Enigma Machine Simulator 🔐**
+- **A simulation of the Enigma encryption machine used during World War II.**
+- **Concepts**: Cryptography, object-oriented design, historical computing.
 
-#### **3. Enigma Machine** 🔐  
-- **Description**: A simulator for the WWII Enigma cipher machine, implementing historical encryption and decryption processes.  
-- **Concepts**: Object-oriented programming, linked lists, file I/O, recursion.  
-- **How to Run**:  
-  ```bash
-  java EnigmaMain <input-file>
-  ```  
+#### **3. 2048 Game 🎮**
+- **A playable version of the popular 2048 puzzle game.**
+- **Concepts**: 2D arrays, game logic, user input handling.
 
-#### **4. Build Your Own World (BYOW)** 🌎  
-- **Description**: A procedurally generated world-building project with terrain, rooms, and player movement.  
-- **Concepts**: Randomized world generation, Perlin noise, object-oriented programming.  
-- **Features**:  
-  - Infinite world generation  
-  - Player-controlled movement  
-  - Seed-based environment consistency  
-- **How to Run**:  
-  ```bash
-  java BYOWMain
-  ```  
-
----
-
-### **Other Personal Projects**  
-
-#### **1. PathPilot (Pathfinding Algorithm Visualizer)** 🛤️  
-- **Description**: A visualizer for shortest path algorithms like Dijkstra and A*.  
-- **Concepts**: Graph traversal, priority queues, GUI development.  
-- **How to Run**:  
-  ```bash
-  python3 pathpilot.py
-  ```  
-
-#### **2. Chrome Dinosaur Game (Recreation)** 🦖  
-- **Description**: A Python-based recreation of the Chrome Dinosaur game with jump and obstacle mechanics.  
-- **Concepts**: Game development, physics simulation.  
-- **How to Run**:  
-  ```bash
-  python3 dino_game.py
-  ```  
-
----
-
-## **📌 How to Use This Repository**
-1. Clone the repository:  
-   ```bash
-   git clone https://github.com/dbswjd24/eileenhwang.git
-   cd eileenhwang
-   ```  
-2. Follow the specific instructions under each project to run them.  
+#### **4. Double-Ended Queue (Deque) Implementation 🔄**
+- **A custom implementation of a double-ended queue (deque) data structure.**
+- **Concepts**: Data structures, generics, iterator pattern.
 
 ---
 
 ## **📩 Contact**
-For questions or discussions, feel free to reach out or open an issue on GitHub.  
+For questions or discussions, feel free to open an issue on GitHub or reach out.
