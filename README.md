@@ -83,7 +83,6 @@ This repository contains various coding projects demonstrating concepts in **Pyt
 ---
 
 ### **Other Personal Projects**  
-These projects are separate from coursework and were developed independently.
 
 #### **1. PathPilot (Pathfinding Algorithm Visualizer)** 🛤️  
 - **Description**: A visualizer for shortest path algorithms like Dijkstra and A*.  
