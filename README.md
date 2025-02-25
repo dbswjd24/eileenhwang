@@ -50,6 +50,7 @@ This repository showcases a variety of **Python** and **Java** projects covering
 #### **PathPilot (Pathfinding Algorithm Visualizer) 🛤️**
 A visualizer for shortest path algorithms like Dijkstra and A.*
 - **Concepts**: Graph traversal, priority queues, GUI development.
+  - participated as an UI/UX designer and PM.
 
 ## **📩 Contact**
 For questions or discussions, feel free to open an issue on GitHub or reach out.
