@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <title>Memory Card Game</title>
+  <link rel="stylesheet" href="assets/css/gamestyle.css">
+</head>
+<body>
+  <nav class="nav-links">
+    <a href="index.html" class="nav-link">HOME</a>
+    <a href="about.html" class="nav-link">ABOUT</a>
+  </nav>
+  <div class="game-info">
+    <p class="time">remaining time: <span><b>0</b>s</span></p>
+    <p class="flips">flips: <span><b>0</b></span></p>
+  </div>
+    <div class="box">
+      <ul class="cards" id="cards-container">
+        <!-- Cards will be dynamically generated based on level -->
+      </ul>
+      <div class="message" id="try-again" style="display: none;">refresh and try again</div>
+      <div class="message" id="congrats" style="display: none;">congrats! all clear</div>
+    </div>
+    <script src="assets/js/game.js"></script>
+  </body>
+</html>

@@ -1,0 +1,262 @@
+@font-face {
+  font-family: 'KoreanKPNBR';
+  src: url('../font/KoreanKPNBR.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'KoreanKPNBR', sans-serif;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  background: #D1E1EB;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation Links */
+.nav-links {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.nav-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  transition: opacity 0.3s;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+/* Main Container */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 64px;
+  font-weight: bold;
+  color: #FFD700;
+  text-align: center;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Story Section */
+.story-section {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 36px;
+  color: #FF69B4;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.story-text {
+  font-size: 20px;
+  color: #2A0000;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Characters Section */
+.characters-section {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.level-1 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.level-2 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.level-3 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.level-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.level-4 .character-card {
+  padding: 20px;
+}
+
+.level-4 .character-name {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.character-card {
+  background: #FFF7CC;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.level-section {
+  margin-bottom: 60px;
+}
+
+.level-title {
+  font-size: 28px;
+  color: #FF69B4;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.character-image {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+  object-fit: contain;
+  display: block;
+}
+
+.character-name {
+  font-size: 28px;
+  color: #2A0000;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.character-desc {
+  font-size: 16px;
+  color: #2A0000;
+  line-height: 1.6;
+}
+
+.level-2 .character-card,
+.level-3 .character-card {
+  padding: 20px;
+}
+
+.level-2 .character-name,
+.level-3 .character-name {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+/* Play Button */
+.play-button {
+  background-color: #FFB6C1;
+  color: #FF1493;
+  padding: 15px 40px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 20px;
+}
+
+.play-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .page-title {
+    font-size: 48px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+  }
+  
+  .story-text {
+    font-size: 18px;
+  }
+  
+  .characters-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+  }
+  
+  .character-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 80px 20px 30px;
+  }
+  
+  .page-title {
+    font-size: 36px;
+  }
+  
+  .characters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fade animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+

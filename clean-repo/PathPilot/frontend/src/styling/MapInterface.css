@@ -1,0 +1,92 @@
+.map-interface {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height of the viewport */
+}
+
+.address-bar {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    background: white;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.back-button {
+    border: none;
+    background: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.map-view {
+    height: 100vh; /* Adjust based on your layout */
+    background-image: url('../image/mapImage.png'); /* Replace with the path to your image */
+    background-size: cover; /* Cover the entire div */
+    background-position: center; /* Center the image in the div */
+    z-index: 1;
+}
+
+.address-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left: 1em;
+}
+
+.address-input input {
+    border: none;
+    margin: 0 0.5em;
+}
+
+
+.time-inputs {
+    display: flex;
+    justify-content: space-around;
+    margin: 1em 0;
+}
+
+.time-input {
+    background: #f0f0f0;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.time {
+    font-weight: bold;
+    margin-top: 0.5em;
+}
+
+.next-button {
+    background: #ff6f00; /* Example button color */
+    color: white;
+    border: none;
+    padding: 1em 2em;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.back-arrowbutton {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 90px;
+    left: 18px; 
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+
+}
+
+.back-arrow{
+    width: 18px;
+    height: 15px;
+}

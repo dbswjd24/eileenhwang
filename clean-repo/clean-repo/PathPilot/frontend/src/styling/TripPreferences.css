@@ -1,0 +1,248 @@
+.trip-preferences {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start; /* 상단부터 시작 */
+  margin: auto;
+  padding: 20px;
+  border-radius: 20px;
+  height: auto; /* 높이 자동 조절 */
+  transition: height 0.3s ease-in-out;
+  z-index: 100;
+}
+
+.preference-item {
+  margin-top: 18px;
+  margin-left: -10px;
+  width: 333px;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: rgb(241, 238, 237);
+  color: orange;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.preference-item label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.preference-item input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button {
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.trip-preferences-font {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.gary-line {
+  position: absolute;
+  left:0;
+  width: 500px;
+  height: 4px;
+  background-color: rgb(241, 238, 237);
+  z-index: 1;
+}
+
+.black-line {
+  position: absolute;
+  left:0;
+  width: 100px;
+  height: 4px;
+  background-color: black;
+  z-index: 2;
+}
+
+.black-line2 {
+  position: absolute;
+  left:0;
+  width: 180px;
+  height: 4px;
+  background-color: black;
+  z-index: 2;
+}
+
+.start-time {
+
+  left: 180px;
+  position: absolute;
+}
+
+.end-time {
+  left: 185px;
+  position: absolute;
+}
+
+.start {
+  margin-left: -200px;
+  margin-top: 18px;
+  display: flex;
+  position:relative;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.end {
+  left: 15px;
+  bottom: 130px;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.nextbutton{
+  position:absolute;
+  bottom: 36px;
+  border-radius: 12px;
+  height: 40px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+  color: white;
+}
+
+.disabled-datepicker {
+  opacity: 0.5; 
+  pointer-events: none; 
+}
+
+
+.custom-datepicker {
+  position: absolute; /* 절대 위치 설정 */
+  left: -50px;
+}
+
+.preference-item2 {
+  margin-top: 18px;
+  margin-left: -10px;
+  width: 300px;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: rgb(241, 238, 237);
+  color: orange;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.main-two{
+  position: relative;
+  width: 333px;
+  height: 110px;
+  margin-top: 18px;
+}
+
+.topleft-menu {
+  left: 0px;
+  top: 0px;
+  display: flex;
+  
+}
+
+.topleft-gray{
+  
+  background-color: rgb(241, 238, 237);
+  color: rgb(211, 211 ,211);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  display: flex;
+  width: 56px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+}
+
+.topleft-orange {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  width: 56px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+  color: #FFFF;
+  border-radius: 7px;
+}
+
+.emptyspace {
+  margin-right: 5px;
+}
+
+.every-box {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  left: 70px;
+  bottom: 45px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.input-field {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 80px;
+  height: 20px;
+  border-radius: 8px;
+}
+
+.next-button2{
+  position:absolute;
+  bottom: 16px;
+  right: 20px;
+  border-radius: 12px;
+  height: 30px;
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+  color: white;
+}
+
+.left-arrow2 {
+  position: absolute;
+  left: 20px;
+  bottom: 25px;
+  width: 18px;
+  height: 15px;
+}
+
+.back-font {
+  position: absolute;
+  bottom: 25px;
+  left: 50px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgb(211, 211 ,211);
+}
