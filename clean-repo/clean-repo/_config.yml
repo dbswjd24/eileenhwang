@@ -1,8 +1,0 @@
-exclude:
-  - PathPilot/frontend/node_modules
-  - node_modules
-  - vendor
-  - .github
-  - Gemfile
-  - Gemfile.lock
-
