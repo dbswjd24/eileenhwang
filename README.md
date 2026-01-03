@@ -1,7 +1,7 @@
 # **🚀 Projects Collection**
 This repository showcases a variety of **Python** and **Java** projects covering topics such as **game development, data structures, algorithms, and cryptography**.
 
-
+---
 
 ## **📝 Projects Overview**
 
@@ -46,11 +46,21 @@ This repository showcases a variety of **Python** and **Java** projects covering
 - **Concepts**: Data structures, generics, iterator pattern.
 
 ---
+
 ## **🛠 Other Projects**
+
 #### **PathPilot (Pathfinding Algorithm Visualizer) 🛤️**
 A visualizer for shortest path algorithms like Dijkstra and A.*
 - **Concepts**: Graph traversal, priority queues, GUI development.
   - participated as an UI/UX designer and PM.
 
+#### **SmartTodo (Productivity Desktop App) ✅**
+A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category.
+- **Concepts**: Desktop app development, local storage, task filtering, UI/UX design.
+  - features include dark mode, category management, progress tracking, and deadline-based filtering.
+  - contributed as the sole developer and designer.
+
+---
+
 ## **📩 Contact**
-For questions or discussions, feel free to open an issue on GitHub or reach out.
+For questions or discussions, feel free to open an issue on GitHub or reach out to eileenhwang@berkeley.edu.
