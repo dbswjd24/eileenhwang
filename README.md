@@ -60,6 +60,12 @@ A cross-platform to-do list app built with Electron that prioritizes tasks based
   - features include dark mode, category management, progress tracking, and deadline-based filtering.
   - contributed as the sole developer and designer.
 
+#### **MemoryGame (Card Matching Game) 🧠**
+A fast, clean memory card game where you flip cards, match pairs, and try to finish with the fewest moves (or fastest time)
+- **Concepts**: Game state management, event handling, array shuffling/randomization, UI animations, responsive layout
+  - features include move tracking, match detection, restart/new game, and smooth flip interactions
+  - contributed as the sole developer and designer.
+
 ---
 
 ## **📩 Contact**
