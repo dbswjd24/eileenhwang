@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF4F3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        
+        .mac-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-bottom: 1px solid #d0d0d0;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            gap: 12px;
+        }
+        
+        .mac-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mac-header-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .traffic-light.red {
+            background: linear-gradient(135deg, #ff5f57 0%, #ff3b30 100%);
+        }
+        
+        .traffic-light.yellow {
+            background: linear-gradient(135deg, #ffbd2e 0%, #ff9500 100%);
+        }
+        
+        .traffic-light.green {
+            background: linear-gradient(135deg, #28ca42 0%, #30d158 100%);
+        }
+        
+        .traffic-light:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+            margin-left: 12px;
+        }
+        
+        .nav-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .nav-btn:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .search-bar {
+            height: 28px;
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-bar .lock-icon {
+            color: #666;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+        
+        .search-bar .url {
+            font-size: 13px;
+            color: #333;
+            font-weight: 400;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .nav-header {
+            background: transparent;
+            border-bottom: none;
+            padding: 1rem 0;
+            margin-top: 44px;
+            position: sticky;
+            top: 44px;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #767676;
+            font-weight: 400;
+            font-size: 0.8rem;
+            transition: color 0.2s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .nav-links a:hover {
+            color: #F791A9;
+        }
+        
+        .nav-links a.active {
+            color: #F791A9;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 4px 16px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            padding: 0.5rem 0;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .dropdown-content a {
+            color: #767676;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #F9F6F5;
+            color: #F791A9;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.6rem;
+            margin-left: 0.3rem;
+        }
+        
+        .main-content {
+            flex: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 6rem;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .profile-section {
+            flex-shrink: 0;
+        }
+        
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 4px solid #F791A9;
+            object-fit: cover;
+            box-shadow: 0 8px 32px rgba(247, 145, 169, 0.3);
+        }
+        
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .greeting {
+            font-size: 1.1rem;
+            color: #767676;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            text-align: left;
+        }
+        
+        .description {
+            font-size: 0.95rem;
+            color: #767676;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .experience-text {
+            font-size: 0.95rem;
+            color: #767676;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+        
+        .email {
+            font-size: 1.1rem;
+            color: #767676;
+            text-decoration: underline;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .email:hover {
+            color: #F791A9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+        
+        .social-link img {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .main-content {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: center;
+                text-align: center;
+                padding: 3rem 1.5rem;
+            }
+            
+            .profile-image {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .greeting {
+                font-size: 1.2rem;
+            }
+            
+            .description,
+            .experience-text {
+                font-size: 1.1rem;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .greeting {
+                font-size: 1.1rem;
+            }
+            
+            .description,
+            .experience-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mac-header">
+        <div class="mac-header-left">
+            <div class="traffic-light red" onclick="handleTrafficLight('close')"></div>
+            <div class="traffic-light yellow" onclick="handleTrafficLight('minimize')"></div>
+            <div class="traffic-light green" onclick="handleTrafficLight('maximize')"></div>
+        </div>
+        <div class="mac-header-center">
+            <div class="search-bar">
+                <span class="lock-icon">🔒</span>
+                <span class="url">https://about_me.com</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-header">
+        <div class="nav-content">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About Me</a></li>
+                    <li><a href="experiences.html">Experiences</a></li>
+                    <li class="dropdown">
+                        <a href="#projects">Projects</a>
+                        <div class="dropdown-content">
+                            <a href="design.html">Design</a>
+                            <a href="cs.html">CS</a>
+                        </div>
+                    </li>
+                    <li><a href="hackathons.html">Hackathons</a></li>
+                    <li><a href="designathons.html">Designathons</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="profile-section">
+            <img src="assets/img/EileenHwang.png" 
+                 alt="Eileen Hwang Profile Picture" 
+                 class="profile-image">
+        </div>
+        
+        <div class="content-section">
+            <p class="greeting">
+                Hello, my name is Yoonjung. You can call me Eileen.
+            </p>
+            
+            <p class="description">
+                I am a passionate UI/UX designer, front-end developer, and aspiring product manager dedicated to creating 
+                digital solutions that enhance user engagement and streamline processes. With a strong background in 
+                computer science and design, I specialize in developing intuitive, responsive, and visually appealing 
+                applications.
+            </p>
+            
+            <p class="experience-text">
+                My experience in cross-functional collaboration has sparked my enthusiasm for bridging technology and 
+                business, aiming to leverage this through a PM role. I am committed to leveraging both my technical skills 
+                and strategic insights to craft seamless digital experiences that resonate with users and achieve business 
+                objectives.
+            </p>
+            
+            <div class="contact-info">
+                <a href="mailto:eileenhwang@berkeley.edu" class="email">
+                    EILEENHWANG@BERKELEY.EDU
+                </a>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/eileenyjhwang/" target="_blank" class="social-link">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" 
+                             alt="LinkedIn" 
+                             style="filter: invert(27%) sepia(96%) saturate(1982%) hue-rotate(195deg) brightness(93%) contrast(101%);">
+                    </a>
+                    <a href="https://github.com/dbswjd24/eileenhwang" target="_blank" class="social-link">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" 
+                             alt="GitHub"
+                             style="filter: invert(13%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function handleTrafficLight(action) {
+            const button = event.currentTarget;
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+            
+            switch (action) {
+                case 'close':
+                    document.body.style.opacity = '0.5';
+                    setTimeout(() => {
+                        document.body.style.opacity = '1';
+                        console.log('Window close simulation');
+                    }, 300);
+                    break;
+                case 'minimize':
+                    document.querySelector('.main-content').style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        document.querySelector('.main-content').style.transform = 'scale(1)';
+                        console.log('Window minimize simulation');
+                    }, 300);
+                    break;
+                case 'maximize':
+                    document.querySelector('.main-content').style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        document.querySelector('.main-content').style.transform = 'scale(1)';
+                        console.log('Window maximize simulation');
+                    }, 300);
+                    break;
+            }
+        }
+        
+        function goBack() {
+            document.querySelector('.main-content').style.transform = 'translateX(-20px)';
+            document.querySelector('.main-content').style.opacity = '0.7';
+            
+            setTimeout(() => {
+                document.querySelector('.main-content').style.transform = 'translateX(0)';
+                document.querySelector('.main-content').style.opacity = '1';
+                console.log('Navigate back to home');
+            }, 200);
+        }
+        
+        function navigateTo(section) {
+            // Remove active class from all links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to the clicked section
+            let activeLink;
+            switch(section) {
+                case 'experiences':
+                    activeLink = document.querySelector('a[onclick="navigateTo(\'experiences\')"]');
+                    break;
+                case 'projects':
+                case 'design-projects':
+                case 'cs-projects':
+                    activeLink = document.querySelector('.dropdown > a');
+                    break;
+                case 'hackathons':
+                    activeLink = document.querySelector('a[onclick="navigateTo(\'hackathons\')"]');
+                    break;
+                case 'designathons':
+                    activeLink = document.querySelector('a[onclick="navigateTo(\'designathons\')"]');
+                    break;
+            }
+            
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            console.log(`Navigate to ${section}`);
+            // In a real app, you would navigate to the appropriate section here
+        }
+    </script>
+</body>
+</html>
