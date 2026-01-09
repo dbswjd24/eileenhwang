@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathPilot - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #FAF4F3;
+        }
+        
+        .mac-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-bottom: 1px solid #d0d0d0;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            gap: 12px;
+        }
+        
+        .mac-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mac-header-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .traffic-light.red {
+            background: linear-gradient(135deg, #ff5f57 0%, #ff3b30 100%);
+        }
+        
+        .traffic-light.yellow {
+            background: linear-gradient(135deg, #ffbd2e 0%, #ff9500 100%);
+        }
+        
+        .traffic-light.green {
+            background: linear-gradient(135deg, #28ca42 0%, #30d158 100%);
+        }
+        
+        .traffic-light:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-bar {
+            height: 28px;
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-bar .lock-icon {
+            color: #666;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+        
+        .search-bar .url {
+            font-size: 13px;
+            color: #333;
+            font-weight: 400;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .nav-header {
+            background: transparent;
+            border-bottom: none;
+            padding: 1rem 0;
+            margin-top: 44px;
+            position: sticky;
+            top: 44px;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #767676;
+            font-weight: 400;
+            font-size: 0.8rem;
+            transition: color 0.2s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .nav-links a:hover {
+            color: #F791A9;
+        }
+        
+        .nav-links a.active {
+            color: #F791A9;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 4px 16px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            padding: 0.5rem 0;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .dropdown-content a {
+            color: #767676;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #F9F6F5;
+            color: #F791A9;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.6rem;
+            margin-left: 0.3rem;
+        }
+
+        .banner-image {
+            width: 100%;
+            border-radius: 0;
+            margin: 0;
+            box-shadow: none;
+            display: block;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .icon-title {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .project-meta {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .role {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1.5px solid #666;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .github-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 24px;
+            background-color: #333;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 14px;
+        }
+
+        .github-link:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 50px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            color: #000;
+            font-style: italic;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 12px;
+        }
+
+        .feature-section {
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            margin-bottom: 25px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #000;
+            display: inline;
+        }
+
+        .feature-description {
+            display: inline;
+        }
+
+        .project-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-image-small {
+            width: 100%;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 60px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .icon-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mac-header">
+        <div class="mac-header-left">
+            <div class="traffic-light red" onclick="handleTrafficLight('close')"></div>
+            <div class="traffic-light yellow" onclick="handleTrafficLight('minimize')"></div>
+            <div class="traffic-light green" onclick="handleTrafficLight('maximize')"></div>
+        </div>
+        <div class="mac-header-center">
+            <div class="search-bar">
+                <span class="lock-icon">🔒</span>
+                <span class="url">https://allaboutme.com/pathpilot</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-header">
+        <div class="nav-content">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="experiences.html">Experiences</a></li>
+                    <li class="dropdown">
+                        <a href="#projects">Projects</a>
+                        <div class="dropdown-content">
+                            <a href="design.html">Design</a>
+                            <a href="cs.html">CS</a>
+                        </div>
+                    </li>
+                    <li><a href="hackathons.html">Hackathons</a></li>
+                    <li><a href="designathons.html">Designathons</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <img src="assets/img/pathpilot_banner.png" alt="PathPilot Banner" class="banner-image">
+    
+    <div class="container">
+        <div class="header">
+            <div class="icon-title">🗺🚗📍</div>
+            <h1>PathPilot</h1>
+            <p class="project-meta">2024.01 - 2024.01 (LikeLion Hackathon 2024)</p>
+            <p class="role">UI/UX Designer</p>
+            <a href="https://github.com/idery325/Road-Trip" target="_blank" class="github-link">View GitHub Repository</a>
+            <p class="intro-text">
+                As a passionate UI/UX designer, I spearheaded the design for PathPilot, an innovative 
+                mobile app that seamlessly integrates trip planning with social engagement and local 
+                insights. My focus was on crafting an intuitive user experience that addresses the 
+                growing demand for independent travel and the challenges associated with it.
+            </p>
+        </div>
+
+        <section>
+            <h2>Project Overview</h2>
+            <p>
+                PathPilot is a mobile application designed to revolutionize the way users plan their 
+                road trips. With the rise of autonomous vehicles and a growing preference for 
+                independent travel experiences, PathPilot offers a personalized approach to itinerary 
+                planning. The app provides key services, including:
+            </p>
+            <ul>
+                <li>Customized recommendations for hidden gems suggested by locals.</li>
+                <li>Curated amenities for a safe and enjoyable travel experience.</li>
+                <li>Social media integration for discovering trending hotspots.</li>
+            </ul>
+        </section>
+
+        <img src="assets/img/projectoverview.png" alt="Project Overview" class="project-image">
+
+        <section>
+            <h2>Design Process</h2>
+            <p>
+                My design process was user-centric, involving extensive research into user needs 
+                and travel planning behaviors. I identified the problem space by recognizing the 
+                stress associated with trip planning and the lack of comprehensive multi-stop route 
+                optimization tools. Through surveys and user testing, I mapped out the journey of our 
+                primary personas, understanding their pain points and preferences, which guided the 
+                design of the app's core features.
+            </p>
+        </section>
+
+        <img src="assets/img/design1.png" alt="Design Process" class="project-image">
+        <img src="assets/img/design2.png" alt="Key Features Screenshot 1" class="project-image-small">
+
+        <div class="feature-section">
+            <h2>Key Features</h2>
+            
+            <div class="feature-item">
+                <span class="feature-title">Intuitive Planning Interface:</span>
+                <span class="feature-description">
+                    A clean and engaging interface that invites users to 
+                    input their starting point, like Berkeley, and visualize recommended stops and 
+                    destinations.
+                </span>
+            </div>
+
+            <div class="feature-item">
+                <span class="feature-title">Personalized Itineraries:</span>
+                <span class="feature-description">
+                    Leveraging user preferences for rest stops, meal times, 
+                    and interests to generate optimal route recommendations.
+                </span>
+            </div>
+
+            <div class="feature-item">
+                <span class="feature-title">Local and Social Insights:</span>
+                <span class="feature-description">
+                    Integration with social media and local content 
+                    creators to provide up-to-date and authentic travel suggestions.
+                </span>
+            </div>
+        </div>
+
+
+        <img src="assets/img/design3.png" alt="Key Features Screenshot 2" class="project-image-small">
+
+        <section>
+            <h2>Outcomes</h2>
+            <p>
+                The app's design emphasizes simplicity and personalization, allowing users to plan 
+                their road trips with ease and confidence. The final product offers a balance between 
+                guided recommendations and personal customization, empowering users to discover 
+                and explore with PathPilot as their co-pilot.
+            </p>
+        </section>
+
+        <section>
+            <h2>Future Scope</h2>
+            <p>
+                Looking ahead, the app aims to incorporate real-time navigation and community 
+                features to further enhance user engagement. PathPilot is poised for scalability with 
+                plans to establish partnerships with local businesses and content creators, offering 
+                unique monetization avenues through targeted advertising and affiliate marketing.
+            </p>
+        </section>
+        <img src="assets/img/design4.png" alt="Key Features Screenshot 3" class="project-image-small">
+
+    </div>
+    
+    <script>
+        function handleTrafficLight(action) {
+            const button = event.currentTarget;
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+            
+            switch (action) {
+                case 'close':
+                    document.body.style.opacity = '0.5';
+                    setTimeout(() => {
+                        document.body.style.opacity = '1';
+                    }, 300);
+                    break;
+                case 'minimize':
+                    document.querySelector('.container').style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        document.querySelector('.container').style.transform = 'scale(1)';
+                    }, 300);
+                    break;
+                case 'maximize':
+                    document.querySelector('.container').style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        document.querySelector('.container').style.transform = 'scale(1)';
+                    }, 300);
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
