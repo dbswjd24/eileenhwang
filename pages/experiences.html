@@ -77,32 +77,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
-        .nav-buttons {
-            display: flex;
-            gap: 6px;
-            margin-left: 12px;
-        }
-        
-        .nav-btn {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            background: #ffffff;
-            border: 1px solid #d0d0d0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 12px;
-            color: #666;
-            font-weight: bold;
-        }
-        
-        .nav-btn:disabled {
-            color: #ccc;
-            cursor: not-allowed;
-        }
-        
         .search-bar {
             height: 28px;
             background: #ffffff;
@@ -224,42 +198,62 @@
         
         .main-content {
             flex: 1;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
             width: 100%;
         }
         
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1E1E1E;
-            margin-bottom: 2rem;
-            text-align: center;
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
         }
         
-        .experience-section {
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #F791A9 0%, #F8DCDC 100%);
+        }
+        
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        
+        .experience-item:nth-child(1) { animation-delay: 0.1s; }
+        .experience-item:nth-child(2) { animation-delay: 0.2s; }
+        .experience-item:nth-child(3) { animation-delay: 0.3s; }
+        .experience-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -3.4rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #F791A9;
+            border: 3px solid #FAF4F3;
+            box-shadow: 0 0 0 2px #F791A9;
+        }
+        
+        .experience-card {
             background: white;
-            border-radius: 0;
-            padding: 2.5rem;
-            margin: 0;
-            box-shadow: none;
-            border: none;
-        }
-        
-        .experience-section:first-child {
-            border-radius: 12px 12px 0 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
-        .experience-section:last-child {
-            border-radius: 0 0 12px 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
-        .experience-section:only-child {
             border-radius: 12px;
+            padding: 2rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(247, 145, 169, 0.2);
         }
         
         .experience-header {
@@ -272,38 +266,60 @@
         }
         
         .experience-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #1E1E1E;
             margin-bottom: 0.5rem;
         }
         
         .experience-company {
-            font-size: 1.1rem;
-            color: #767676;
+            font-size: 1rem;
+            color: #F791A9;
             font-weight: 500;
         }
         
         .experience-date {
             font-size: 0.9rem;
             color: #767676;
-            font-style: italic;
+            font-weight: 500;
+            background: #F8DCDC;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
         }
         
         .experience-description {
             font-size: 0.95rem;
             color: #767676;
             line-height: 1.8;
-            margin-top: 1rem;
         }
         
-        .experience-description ul {
-            margin-top: 1rem;
-            padding-left: 1.5rem;
+        .experience-description p {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
         }
         
-        .experience-description li {
-            margin-bottom: 0.5rem;
+        .experience-description p::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #F791A9;
+            font-weight: bold;
+        }
+        
+        .experience-description p:last-child {
+            margin-bottom: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         @media (max-width: 768px) {
@@ -316,16 +332,20 @@
                 padding: 3rem 1.5rem;
             }
             
-            .experience-section {
+            .timeline {
+                padding-left: 2rem;
+            }
+            
+            .experience-item::before {
+                left: -2.4rem;
+            }
+            
+            .experience-card {
                 padding: 1.5rem;
             }
             
             .experience-header {
                 flex-direction: column;
-            }
-            
-            .nav-buttons {
-                display: none;
             }
         }
         
@@ -336,8 +356,8 @@
                 gap: 1rem;
             }
             
-            .page-title {
-                font-size: 2rem;
+            .experience-title {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -379,63 +399,56 @@
     </div>
     
     <div class="main-content">
-        <h1 class="page-title">Experiences</h1>
-        
-        <div class="experience-section">
-            <div class="experience-header">
-                <div>
-                    <h2 class="experience-title">Senior Product Consultant</h2>
-                    <p class="experience-company">Adobe</p>
+        <div class="timeline">
+            <div class="experience-item">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <h2 class="experience-title">Senior Product Consultant</h2>
+                            <p class="experience-company">Adobe</p>
+                        </div>
+                        <p class="experience-date">Sep 2025 - Dec 2025</p>
+                    </div>
+                    <div class="experience-description">
+                        <p>Architected an AI-driven strategy for Adobe's SDLC to streamline cross-functional collaboration and handoffs across product, design, and engineering teams</p>
+                        <p>Diagnosed workflow bottlenecks and communication gaps, then designed AI-powered solutions and process optimizations to eliminate redundancies and improve execution velocity</p>
+                        <p>Defined KPIs and implemented guidelines to operationalize AI capabilities, driving measurable gains in delivery speed, quality, and end-to-end pipeline visibility</p>
+                    </div>
                 </div>
-                <p class="experience-date">Sep 2025 - Dec 2025</p>
             </div>
-            <div class="experience-description">
-                <p> - Architected an AI-driven strategy for Adobe's SDLC to streamline cross-frunctional collaboration and handoffs across product, design, and engineering teams
-                
-                <p>
-                    - Diagnosed workflow bottlenecks and communication gaps, then designed AI-powered solutions and process optimizations to eliminate redundancies and improve execution velocity
-                </p>
-                
-                <p>
-                    - Defined KPIs and implemented guidelines to operationalize AI capabilities, driving measurable gains in delivery speed, quality, and end-to-end pipeline visibility
-                </p>
-            </div>
-        </div><div class="experience-section">
-            <div class="experience-header">
-                <div>
-                    <h2 class="experience-title">Project Manager & Front-End Engineer</h2>
-                    <p class="experience-company">ZEP</p>
+
+            <div class="experience-item">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <h2 class="experience-title">Project Manager & Front-End Engineer</h2>
+                            <p class="experience-company">ZEP</p>
+                        </div>
+                        <p class="experience-date">Aug 2025 - Dec 2025</p>
+                    </div>
+                    <div class="experience-description">
+                        <p>Led project strategy and engineering execution for ZEP & LikeLion by architecting structured, automation-ready quiz generation</p>
+                        <p>Engineered and validated a dataset pipeline, driving model experimentation and prompt stability for scalable content creation</p>
+                        <p>Owned end-to-end cross-functional delivery, coordinating Dockerized API layers and workflow automation scoping</p>
+                    </div>
                 </div>
-                <p class="experience-date">Aug 2025 - Dec 2025</p>
             </div>
-            <div class="experience-description">
-                <p> - Led project strategy and engineering execution for ZEP & LikeLion by architecting structured, automation-ready quiz generation
-                </p>
-                <p>
-                    - Engineered and validated a dataset pipeline, driving model experimentation and prompt stability for scalable content creation
-                </p>
-                <p>
-                    - Owned end-to-end cross-functional delivery, coordinating Dockerized API layers and workflow automation scoping
-                </p>
-            </div>
-        </div>
-        <div class="experience-section">
-            <div class="experience-header">
-                <div>
-                    <h2 class="experience-title">Product Management Intern</h2>
-                    <p class="experience-company">Dorsal.fyi</p>
+
+            <div class="experience-item">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <h2 class="experience-title">Product Management Intern</h2>
+                            <p class="experience-company">Dorsal.fyi</p>
+                        </div>
+                        <p class="experience-date">May 2025 - Aug 2025</p>
+                    </div>
+                    <div class="experience-description">
+                        <p>Spearheaded design and launch of a billing comparison tool that empowered patients to better understand medical costs</p>
+                        <p>Defined clear requirements and prioritized features for insurance dispute workflows based on user feedback and support data</p>
+                        <p>Coordinated daily with engineering and design teams to deliver patient-centric improvements on schedule, boosting overall product satisfaction</p>
+                    </div>
                 </div>
-                <p class="experience-date">May 2025 - Aug 2025</p>
-            </div>
-            <div class="experience-description">
-                <p> - Spearheaded design and launch of a billing comparison tool that empowered patients to better understand medical costs
-                </p>
-                <p>
-                    - Defined clear requirements and prioritized features for insurance dispute workflows based on user feedback and support data
-                </p>
-                <p>
-                    - Coordinated daily with engineering and design teams to deliver patient-centric improvements on schedule, boosting overall product satisfaction
-                </p>
             </div>
         </div>
     </div>
@@ -469,40 +482,6 @@
                     break;
             }
         }
-        
-        function navigateTo(section) {
-            // Remove active class from all links
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Add active class to the clicked section
-            let activeLink;
-            switch(section) {
-                case 'experiences':
-                    activeLink = document.querySelector('a[onclick="navigateTo(\'experiences\')"]');
-                    break;
-                case 'projects':
-                case 'design-projects':
-                case 'cs-projects':
-                    activeLink = document.querySelector('.dropdown > a');
-                    break;
-                case 'hackathons':
-                    activeLink = document.querySelector('a[onclick="navigateTo(\'hackathons\')"]');
-                    break;
-                case 'designathons':
-                    activeLink = document.querySelector('a[onclick="navigateTo(\'designathons\')"]');
-                    break;
-            }
-            
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-            
-            console.log(`Navigate to ${section}`);
-            // In a real app, you would navigate to the appropriate section here
-        }
     </script>
 </body>
 </html>
-
