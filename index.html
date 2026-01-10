@@ -418,6 +418,43 @@
     }
 
     @media (max-width: 768px) {
+      .mac-header {
+        padding: 0 12px;
+      }
+      
+      .search-bar {
+        max-width: 300px;
+        font-size: 11px;
+      }
+      
+      .search-bar .url {
+        font-size: 11px;
+      }
+      
+      .nav-header {
+        padding: 0.75rem 0;
+      }
+      
+      .nav-content {
+        padding: 0 1rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .dropdown-content {
+        left: auto;
+        right: 0;
+      }
+      
+      .main-content {
+        padding: 2rem 1.5rem;
+      }
+      
       .main-title {
         font-size: 2.5rem;
       }
@@ -440,28 +477,69 @@
       .folder-label {
         font-size: 0.85rem;
       }
-
-      .nav-links {
-        gap: 1.5rem;
-        font-size: 0.85rem;
-      }
-
-      .nav-buttons {
-        display: none;
-      }
     }
 
     @media (max-width: 480px) {
+      .mac-header {
+        height: 40px;
+        padding: 0 8px;
+      }
+      
+      .traffic-light {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .search-bar {
+        max-width: 200px;
+        height: 24px;
+        padding: 0 8px;
+      }
+      
+      .search-bar .url {
+        font-size: 10px;
+      }
+      
+      .nav-header {
+        margin-top: 40px;
+        padding: 0.5rem 0;
+      }
+      
+      .nav-links {
+        gap: 0.75rem;
+        font-size: 0.7rem;
+      }
+      
+      .main-content {
+        padding: 1.5rem 1rem;
+      }
+      
+      .main-title {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+      }
+      
       .folders-container {
         flex-direction: column;
         align-items: center;
         max-width: 200px;
         margin: 2rem auto 0;
+        gap: 0.75rem;
       }
 
       .folder {
         width: 100%;
         max-width: 200px;
+        height: 90px;
+        padding: 1rem 1.25rem;
+      }
+      
+      .folder-label {
+        font-size: 0.8rem;
       }
     }
   </style>

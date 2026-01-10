@@ -342,8 +342,41 @@
         }
 
         @media (max-width: 768px) {
+            .mac-header {
+                padding: 0 12px;
+            }
+            
+            .search-bar {
+                max-width: 300px;
+                font-size: 11px;
+            }
+            
+            .search-bar .url {
+                font-size: 11px;
+            }
+            
+            .nav-header {
+                padding: 0.75rem 0;
+            }
+            
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.75rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .dropdown-content {
+                left: auto;
+                right: 0;
+            }
+            
             .container {
-                padding: 40px 20px;
+                padding: 2rem 1.5rem;
             }
 
             h1 {
@@ -356,6 +389,89 @@
 
             .icon-title {
                 font-size: 36px;
+            }
+            
+            .project-meta {
+                font-size: 14px;
+            }
+            
+            .intro-text {
+                font-size: 15px;
+            }
+            
+            .project-image,
+            .project-image-small {
+                margin: 30px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mac-header {
+                height: 40px;
+                padding: 0 8px;
+            }
+            
+            .traffic-light {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .search-bar {
+                max-width: 200px;
+                height: 24px;
+                padding: 0 8px;
+            }
+            
+            .search-bar .url {
+                font-size: 10px;
+            }
+            
+            .nav-header {
+                margin-top: 40px;
+                padding: 0.5rem 0;
+            }
+            
+            .nav-links {
+                gap: 0.75rem;
+                font-size: 0.7rem;
+            }
+            
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .icon-title {
+                font-size: 32px;
+            }
+            
+            .project-meta {
+                font-size: 13px;
+            }
+            
+            .role {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .intro-text {
+                font-size: 14px;
+            }
+            
+            p, li {
+                font-size: 15px;
+            }
+            
+            .project-image,
+            .project-image-small {
+                margin: 20px 0;
             }
         }
     </style>
