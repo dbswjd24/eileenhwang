@@ -234,12 +234,16 @@
       display: flex;
       gap: 3rem;
       margin-bottom: 4rem;
-      align-items: flex-start;
+      align-items: center;
       animation: fadeInUp 0.8s ease-out both;
     }
     
     .project-item:nth-child(even) {
       flex-direction: row-reverse;
+    }
+    
+    .project-item > * {
+      flex: 1;
     }
     
     .project-item:nth-child(1) { animation-delay: 0.1s; }
@@ -253,8 +257,7 @@
     .project-item:nth-child(9) { animation-delay: 0.9s; }
     
     .project-image {
-      flex: 1;
-      min-width: 400px;
+      width: 100%;
       height: 300px;
       background: #E0E0E0;
       border-radius: 12px;
@@ -269,17 +272,32 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
     .project-image:hover {
       transform: scale(1.02);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
     
+    a .project-image {
+      cursor: pointer;
+    }
+    
+    a .project-image:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 32px rgba(247, 145, 169, 0.2);
+    }
+    
     .project-description-section {
-      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-width: 300px;
+      min-width: 0;
     }
     
     .description-label {
@@ -304,6 +322,8 @@
       color: #767676;
       line-height: 1.8;
       margin-bottom: 1.5rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     
     .project-concepts {
@@ -313,12 +333,21 @@
     }
     
     .concept-tag {
-      background: #E8E8E8;
-      color: #767676;
+      background: #F8DCDC;
+      color: #1E1E1E;
       padding: 0.4rem 0.8rem;
       border-radius: 20px;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
+      border: 1px solid rgba(247, 145, 169, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .concept-tag:hover {
+      background: #F791A9;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(247, 145, 169, 0.3);
     }
     
     @keyframes fadeInUp {
@@ -414,22 +443,8 @@
     <div class="project-item">
       <div class="project-image">IMAGE</div>
       <div class="project-description-section">
-        <h2 class="project-title">SmartTodo</h2>
-        <p class="project-description">A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category. Features include dark mode, category management, progress tracking, and deadline-based filtering. Contributed as the sole developer and designer.</p>
-        <div class="project-concepts">
-          <span class="concept-tag">UI/UX Design</span>
-          <span class="concept-tag">Desktop App Development</span>
-          <span class="concept-tag">Electron</span>
-          <span class="concept-tag">Product Design</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-item">
-      <div class="project-image">IMAGE</div>
-      <div class="project-description-section">
         <h2 class="project-title">Audiolens</h2>
-        <p class="project-description">A Chrome extension concept that explores generating Spotify playlists from images by extracting track and artist information and mapping it to Spotify’s catalog. Focused on problem definition, technical feasibility, and API-driven workflows rather than interface design.</p>
+        <p class="project-description">A Chrome extension concept that explores generating Spotify playlists from images by extracting track and artist information and mapping it to Spotify's catalog. Focused on problem definition, technical feasibility, and API-driven workflows rather than interface design.</p>
         <div class="project-concepts">
           <span class="concept-tag">Product Management</span>
           <span class="concept-tag">Programming</span>
@@ -440,20 +455,24 @@
     </div>
 
     <div class="project-item">
-      <div class="project-image">IMAGE</div>
+      <a href="smarttodo.html" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/SmartTodo.png" alt="SmartTodo">
+        </div>
+      </a>
       <div class="project-description-section">
-        <h2 class="project-title">🐜🐝 Ants vs. SomeBees</h2>
-        <p class="project-description">A strategic tower defense game where ants defend against invading bees. Plan your defense strategy and manage resources to protect your colony.</p>
+        <h2 class="project-title">SmartTodo</h2>
+        <p class="project-description">A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category. Features include dark mode, category management, progress tracking, and deadline-based filtering. Contributed as the sole developer and designer.</p>
         <div class="project-concepts">
-          <span class="concept-tag">Object-Oriented Programming</span>
-          <span class="concept-tag">Inheritance</span>
-          <span class="concept-tag">Game Logic</span>
-          <span class="concept-tag">Python</span>
+          <span class="concept-tag">UI/UX Design</span>
+          <span class="concept-tag">Desktop App Development</span>
+          <span class="concept-tag">Electron</span>
+          <span class="concept-tag">Product Design</span>
         </div>
       </div>
     </div>
   </div>
-  
+
   <script>
     function handleTrafficLight(action) {
       const button = event.currentTarget;

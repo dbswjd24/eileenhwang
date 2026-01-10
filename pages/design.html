@@ -234,7 +234,7 @@
       display: flex;
       gap: 3rem;
       margin-bottom: 4rem;
-      align-items: flex-start;
+      align-items: center;
       animation: fadeInUp 0.8s ease-out both;
     }
     
@@ -242,13 +242,16 @@
       flex-direction: row-reverse;
     }
     
+    .project-item > * {
+      flex: 1;
+    }
+    
     .project-item:nth-child(1) { animation-delay: 0.1s; }
     .project-item:nth-child(2) { animation-delay: 0.2s; }
     .project-item:nth-child(3) { animation-delay: 0.3s; }
     
     .project-image {
-      flex: 1;
-      min-width: 400px;
+      width: 100%;
       height: 300px;
       background: #E0E0E0;
       border-radius: 12px;
@@ -285,11 +288,10 @@
     }
     
     .project-description-section {
-      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-width: 300px;
+      min-width: 0;
     }
     
     .description-label {
@@ -314,6 +316,8 @@
       color: #767676;
       line-height: 1.8;
       margin-bottom: 1.5rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     
     .project-concepts {
@@ -367,7 +371,6 @@
       }
       
       .project-image {
-        min-width: 100%;
         height: 250px;
       }
       
@@ -431,19 +434,19 @@
   
   <div class="main-content">
     <div class="project-item">
-      <a href="../MemoryGame/index.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+      <a href="unetic.html" style="text-decoration: none; color: inherit; display: block;">
         <div class="project-image">
-          <img src="assets/img/memorygame.png" alt="Memory Game">
+          <img src="assets/img/unetic.png" alt="Unetic">
         </div>
       </a>
       <div class="project-description-section">
-        <h2 class="project-title"> Memory Game</h2>
-        <p class="project-description">An interactive memory matching game with a delightful story about friendly dogs. Features character designs and engaging gameplay mechanics.</p>
+        <h2 class="project-title">Unetic</h2>
+        <p class="project-description">A web platform built to improve how students discover, manage, and engage with university clubs. Unetic centralizes verified club information and reduces friction in navigating campus organizations. Served as the product manager and UI/UX designer, leading product direction, user research, and interface design.</p>
         <div class="project-concepts">
+          <span class="concept-tag">Product Management</span>
           <span class="concept-tag">UI/UX Design</span>
-          <span class="concept-tag">Game Design</span>
-          <span class="concept-tag">Character Design</span>
-          <span class="concept-tag">HTML/CSS</span>
+          <span class="concept-tag">Web Development</span>
+          <span class="concept-tag">Figma</span>
         </div>
       </div>
     </div>
@@ -467,19 +470,19 @@
     </div>
 
     <div class="project-item">
-      <a href="unetic.html" style="text-decoration: none; color: inherit; display: block;">
+      <a href="../MemoryGame/index.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
         <div class="project-image">
-          <img src="assets/img/unetic.png" alt="Unetic">
+          <img src="assets/img/memorygame.png" alt="Memory Game">
         </div>
       </a>
       <div class="project-description-section">
-        <h2 class="project-title">Unetic</h2>
-        <p class="project-description">A web platform built to improve how students discover, manage, and engage with university clubs. Unetic centralizes verified club information and reduces friction in navigating campus organizations. Served as the product manager and UI/UX designer, leading product direction, user research, and interface design.</p>
+        <h2 class="project-title">Memory Game</h2>
+        <p class="project-description">An interactive memory matching game with a delightful story about friendly dogs. Features character designs and engaging gameplay mechanics.</p>
         <div class="project-concepts">
-          <span class="concept-tag">Product Management</span>
           <span class="concept-tag">UI/UX Design</span>
-          <span class="concept-tag">Web Development</span>
-          <span class="concept-tag">Figma</span>
+          <span class="concept-tag">Game Design</span>
+          <span class="concept-tag">Character Design</span>
+          <span class="concept-tag">HTML/CSS</span>
         </div>
       </div>
     </div>
