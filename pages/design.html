@@ -263,9 +263,25 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
     .project-image:hover {
       transform: scale(1.02);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    a .project-image {
+      cursor: pointer;
+    }
+    
+    a .project-image:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 32px rgba(247, 145, 169, 0.2);
     }
     
     .project-description-section {
@@ -307,12 +323,21 @@
     }
     
     .concept-tag {
-      background: #E8E8E8;
-      color: #767676;
+      background: #F8DCDC;
+      color: #1E1E1E;
       padding: 0.4rem 0.8rem;
       border-radius: 20px;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
+      border: 1px solid rgba(247, 145, 169, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .concept-tag:hover {
+      background: #F791A9;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(247, 145, 169, 0.3);
     }
     
     @keyframes fadeInUp {
@@ -406,11 +431,14 @@
   
   <div class="main-content">
     <div class="project-item">
-      <div class="project-image">IMAGE</div>
+      <a href="../MemoryGame/index.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/memorygame.png" alt="Memory Game">
+        </div>
+      </a>
       <div class="project-description-section">
-        <div class="description-label">DESCRIPTION:</div>
-        <h2 class="project-title">🎨 Memory Game</h2>
-        <p class="project-description">An interactive memory matching game with a delightful story about friendly dogs. Features beautiful character designs and engaging gameplay mechanics.</p>
+        <h2 class="project-title"> Memory Game</h2>
+        <p class="project-description">An interactive memory matching game with a delightful story about friendly dogs. Features character designs and engaging gameplay mechanics.</p>
         <div class="project-concepts">
           <span class="concept-tag">UI/UX Design</span>
           <span class="concept-tag">Game Design</span>
@@ -421,31 +449,37 @@
     </div>
 
     <div class="project-item">
-      <div class="project-image">IMAGE</div>
+      <a href="bus.html" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/bus6.png" alt="Bus Check n' Go">
+        </div>
+      </a>
       <div class="project-description-section">
-        <div class="description-label">DESCRIPTION:</div>
-        <h2 class="project-title">✨ SmartTodo</h2>
-        <p class="project-description">A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category. Features include dark mode, category management, progress tracking, and deadline-based filtering. Contributed as the sole developer and designer.</p>
+        <h2 class="project-title">Bus Check n' Go</h2>
+        <p class="project-description">A web application that helps users check real-time bus schedules and discover nearby places while commuting. Designed to reduce uncertainty around transit timing and improve everyday travel decisions through a simple, location-based interface. Contributed as a UI/UX designer and software engineer.</p>
         <div class="project-concepts">
           <span class="concept-tag">UI/UX Design</span>
-          <span class="concept-tag">Desktop App Development</span>
-          <span class="concept-tag">Electron</span>
+          <span class="concept-tag">Web Development</span>
+          <span class="concept-tag">Front-End Development</span>
           <span class="concept-tag">Product Design</span>
         </div>
       </div>
     </div>
 
     <div class="project-item">
-      <div class="project-image">IMAGE</div>
+      <a href="unetic.html" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/unetic.png" alt="Unetic">
+        </div>
+      </a>
       <div class="project-description-section">
-        <div class="description-label">DESCRIPTION:</div>
-        <h2 class="project-title">🛤️ PathPilot</h2>
-        <p class="project-description">A visualizer for shortest path algorithms like Dijkstra and A*. Participated as a UI/UX designer and Product Manager, creating an intuitive interface for algorithm visualization.</p>
+        <h2 class="project-title">Unetic</h2>
+        <p class="project-description">A web platform built to improve how students discover, manage, and engage with university clubs. Unetic centralizes verified club information and reduces friction in navigating campus organizations. Served as the product manager and UI/UX designer, leading product direction, user research, and interface design.</p>
         <div class="project-concepts">
-          <span class="concept-tag">UI/UX Design</span>
           <span class="concept-tag">Product Management</span>
-          <span class="concept-tag">Algorithm Visualization</span>
-          <span class="concept-tag">React</span>
+          <span class="concept-tag">UI/UX Design</span>
+          <span class="concept-tag">Web Development</span>
+          <span class="concept-tag">Figma</span>
         </div>
       </div>
     </div>

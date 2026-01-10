@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Designathons - All About Me</title>
+  <title>Design Projects - All About Me</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
@@ -263,9 +263,25 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
     .project-image:hover {
       transform: scale(1.02);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    a .project-image {
+      cursor: pointer;
+    }
+    
+    a .project-image:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 32px rgba(247, 145, 169, 0.2);
     }
     
     .project-description-section {
@@ -307,12 +323,21 @@
     }
     
     .concept-tag {
-      background: #E8E8E8;
-      color: #767676;
+      background: #F8DCDC;
+      color: #1E1E1E;
       padding: 0.4rem 0.8rem;
       border-radius: 20px;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
+      border: 1px solid rgba(247, 145, 169, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .concept-tag:hover {
+      background: #F791A9;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(247, 145, 169, 0.3);
     }
     
     @keyframes fadeInUp {
@@ -378,7 +403,7 @@
     <div class="mac-header-center">
       <div class="search-bar">
         <span class="lock-icon">🔒</span>
-        <span class="url">https://allaboutme.com/designathons</span>
+        <span class="url">https://allaboutme.com/design-projects</span>
       </div>
     </div>
   </div>
@@ -393,12 +418,12 @@
           <li class="dropdown">
             <a href="#projects">Projects</a>
             <div class="dropdown-content">
-              <a href="design.html">Design</a>
+              <a href="design.html" class="active">Design</a>
               <a href="cs.html">CS</a>
             </div>
           </li>
           <li><a href="hackathons.html">Hackathons</a></li>
-          <li><a href="designathons.html" class="active">Designathons</a></li>
+          <li><a href="designathons.html">Designathons</a></li>
         </ul>
       </nav>
     </div>
@@ -406,16 +431,55 @@
   
   <div class="main-content">
     <div class="project-item">
-      <div class="project-image">IMAGE</div>
+      <a href="goodnotes.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/goodnotes.png" alt="GoodNotes Classroom: ClearCollab">
+        </div>
+      </a>
       <div class="project-description-section">
-        <div class="description-label">DESCRIPTION:</div>
-        <h2 class="project-title">🎨 Design Challenges</h2>
-        <p class="project-description">Participating in designathons has been an incredible way to explore creative problem-solving, user-centered design, and rapid prototyping. These competitions push me to think outside the box and create meaningful design solutions under time constraints.</p>
+        <h2 class="project-title"> GoodNotes Classroom: ClearCollab</h2>
+        <p class="project-description">A designathon project exploring how classroom collaboration could be improved by lowering participation anxiety for students and reducing tool complexity for teachers. The concept proposes anonymous questioning and lightweight teacher support within GoodNotes to encourage more inclusive and manageable in-class engagement.</p>
         <div class="project-concepts">
           <span class="concept-tag">UI/UX Design</span>
-          <span class="concept-tag">Rapid Prototyping</span>
+          <span class="concept-tag">Product Strategy</span>
           <span class="concept-tag">User Research</span>
-          <span class="concept-tag">Design Thinking</span>
+          <span class="concept-tag">Education Technology</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <a href="womp.html" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/womp.png" alt="Womp">
+        </div>
+      </a>
+      <div class="project-description-section">
+        <h2 class="project-title">Womp</h2>
+        <p class="project-description">A designathon project exploring how 3D design tools can better support users across different skill levels. Womp proposes a gamified 3D creation experience with guided and pro modes, allowing beginners to build confidence through step-by-step support while giving advanced users control and flexibility without unnecessary friction.</p>
+        <div class="project-concepts">
+          <span class="concept-tag">UI/UX Design</span>
+          <span class="concept-tag">Product Strategy</span>
+          <span class="concept-tag">User Research</span>
+          <span class="concept-tag">3D Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <a href="food.html" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-image">
+          <img src="assets/img/food.png" alt="Food For Thought">
+        </div>
+      </a>
+      <div class="project-description-section">
+        <h2 class="project-title">Food For Thought</h2>
+        <p class="project-description">A designathon project with DoorDash exploring how college students might become more conscious of their health and eating habits without disrupting existing ordering behavior. The concept focuses on reflective features such as mood tracking, food group summaries, and order recaps to help users recognize patterns in emotional and impulsive eating over time.</p>
+        <div class="project-concepts">
+          <span class="concept-tag">UI/UX Design</span>
+          <span class="concept-tag">Product Strategy</span>
+          <span class="concept-tag">User Research</span>
+          <span class="concept-tag">Health & Wellness</span>
         </div>
       </div>
     </div>
