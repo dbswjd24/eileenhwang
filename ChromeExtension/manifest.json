@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Audiolens",
+  "version": "1.2.0",
+  "permissions": ["storage", "offscreen", "identity"],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "oauth2": {
+    "client_id": "af78655285d7400d8349580c2c70c292",
+    "scopes": ["playlist-modify-public", "playlist-modify-private", "user-read-private"]
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self';"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["tesseract/*", "offscreen.html", "offscreen.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

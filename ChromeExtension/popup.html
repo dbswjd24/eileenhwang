@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root { --bg: #121212; --card: #181818; --green: #1DB954; --text: #fff; --text-ms: #b3b3b3; --border: #282828; }
+    body { width: 380px; background: var(--bg); color: var(--text); padding: 20px; font-family: sans-serif; }
+    .header { margin-bottom: 20px; }
+    h1 { font-size: 24px; color: var(--green); margin: 0; display: flex; align-items: center; gap: 10px; }
+    .description { font-size: 13px; color: var(--text-ms); line-height: 1.5; margin-top: 8px; }
+    .btn { background: var(--green); color: #000; border: none; border-radius: 50px; padding: 14px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 12px; font-size: 14px; }
+    .btn:disabled { background: #444; color: #888; cursor: not-allowed; }
+    .batch-list { max-height: 250px; overflow-y: auto; margin: 16px 0; border: 1px solid var(--border); border-radius: 8px; display: none; }
+    .track-row { display: flex; gap: 8px; padding: 10px; border-bottom: 1px solid var(--border); background: var(--card); align-items: center; }
+    .track-row input { background: #2a2a2a; border: 1px solid #333; color: #fff; padding: 6px; border-radius: 4px; width: 40%; font-size: 12px; }
+    .remove-btn { background: transparent; border: none; color: #ff4444; cursor: pointer; font-weight: bold; font-size: 16px; padding: 0 5px; }
+    .status { font-size: 13px; color: var(--text-ms); margin: 12px 0; text-align: center; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎧 Audiolens</h1>
+    <div class="description">Focus your screen's vision. Audiolens reads tracks from screenshots and instantly generates a Spotify playlist. Supports English + Korean.</div>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/*" style="display:none">
+  <button id="chooseBtn" class="btn">Choose Screenshot</button>
+  <button id="runBtn" class="btn" disabled>Run OCR</button>
+  
+  <div id="status" class="status">Ready.</div>
+  <div id="batchList" class="batch-list"></div>
+  <button id="syncBtn" class="btn" style="display:none">Sync to Spotify</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
