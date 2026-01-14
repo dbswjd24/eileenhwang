@@ -7,18 +7,51 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     if (msg.type === "SPOTIFY_LOGIN") {
         const redirect = chrome.identity.getRedirectURL();
-        // FIXED: Added '$' before brackets and fixed the URL to the official Spotify Accounts service
         const url = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-public%20playlist-modify-private%20user-read-private`;
         
+        console.log("Starting Spotify authentication flow...");
+        console.log("Redirect URL:", redirect);
+        
         chrome.identity.launchWebAuthFlow({ url, interactive: true }, (responseUrl) => {
-            if (chrome.runtime.lastError || !responseUrl) {
+            if (chrome.runtime.lastError) {
                 console.error("Auth Error:", chrome.runtime.lastError);
-                return sendResponse({ ok: false });
+                sendResponse({ ok: false, error: chrome.runtime.lastError.message });
+                return;
             }
-            const token = new URLSearchParams(new URL(responseUrl).hash.substring(1)).get("access_token");
-            chrome.storage.local.set({ spotifyToken: token }, () => sendResponse({ ok: !!token }));
+            if (!responseUrl) {
+                console.error("No response URL from Spotify auth - user may have cancelled");
+                sendResponse({ ok: false, error: "Authentication cancelled or failed" });
+                return;
+            }
+            try {
+                console.log("Received response URL from Spotify");
+                const urlObj = new URL(responseUrl);
+                const hash = urlObj.hash.substring(1);
+                const params = new URLSearchParams(hash);
+                const token = params.get("access_token");
+                const error = params.get("error");
+                
+                if (error) {
+                    console.error("Spotify auth error:", error);
+                    sendResponse({ ok: false, error: `Authentication error: ${error}` });
+                    return;
+                }
+                
+                if (token) {
+                    console.log("Successfully obtained access token");
+                    chrome.storage.local.set({ spotifyToken: token }, () => {
+                        sendResponse({ ok: true, token: token });
+                    });
+                } else {
+                    console.error("No access token in response");
+                    sendResponse({ ok: false, error: "No access token in response" });
+                }
+            } catch (e) {
+                console.error("Error parsing auth response:", e);
+                sendResponse({ ok: false, error: e.message });
+            }
         });
-        return true;
+        return true; // Keep channel open for async response
     }
     if (msg.type === "SYNC_TO_SPOTIFY") {
         syncTracks(msg.tracks).then(sendResponse);
@@ -28,7 +61,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 async function handleOCR(dataUrl) {
     const existing = await chrome.offscreen.hasDocument();
-    if (!existing) await chrome.offscreen.createDocument({ url: "offscreen.html", reasons: ["DOM_SCRAPING"], justification: "OCR" });
+    if (!existing) {
+        await chrome.offscreen.createDocument({ 
+            url: chrome.runtime.getURL("offscreen.html"), 
+            reasons: ["DOM_SCRAPING"], 
+            justification: "OCR" 
+        });
+        // Give the offscreen document time to load scripts
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
     return chrome.runtime.sendMessage({ target: "offscreen", type: "process-ocr", data: dataUrl });
 }
 
@@ -38,7 +79,6 @@ async function syncTracks(tracks) {
 
     try {
         const user = await fetch("https://api.spotify.com/v1/me", { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json());
-        
         const uris = [];
         for (const t of tracks) {
             const q = encodeURIComponent(`track:${t.title} artist:${t.artist}`);
