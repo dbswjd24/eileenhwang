@@ -18,7 +18,7 @@ fileInput.addEventListener("change", (e) => {
 });
 
 runBtn.addEventListener("click", async () => {
-    status.textContent = "Processing OCR (English + Korean)...";
+    status.textContent = "Processing OCR...";
     runBtn.disabled = true;
     const reader = new FileReader();
     reader.onload = async () => {
@@ -77,5 +77,7 @@ syncBtn.addEventListener("click", async () => {
         status.textContent = "Syncing...";
         const res = await chrome.runtime.sendMessage({ type: "SYNC_TO_SPOTIFY", tracks: finalTracks });
         status.textContent = res.ok ? `Success! Added ${res.count} songs.` : `Error: ${res.error}`;
+    } else {
+        status.textContent = "Login Failed.";
     }
 });

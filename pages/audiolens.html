@@ -1,646 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CS Projects - All About Me</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #FAF4F3;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-    }
-    
-    .mac-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 44px;
-      background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
-      border-bottom: 1px solid #d0d0d0;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      z-index: 1000;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      gap: 12px;
-    }
-    
-    .mac-header-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .mac-header-center {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-    }
-    
-    .traffic-light {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 0.5px solid rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
-    .traffic-light.red {
-      background: linear-gradient(135deg, #ff5f57 0%, #ff3b30 100%);
-    }
-    
-    .traffic-light.yellow {
-      background: linear-gradient(135deg, #ffbd2e 0%, #ff9500 100%);
-    }
-    
-    .traffic-light.green {
-      background: linear-gradient(135deg, #28ca42 0%, #30d158 100%);
-    }
-    
-    .traffic-light:hover {
-      transform: scale(1.1);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .nav-buttons {
-      display: flex;
-      gap: 6px;
-      margin-left: 12px;
-    }
-    
-    .nav-btn {
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
-      background: #ffffff;
-      border: 1px solid #d0d0d0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 12px;
-      color: #666;
-      font-weight: bold;
-    }
-    
-    .nav-btn:disabled {
-      color: #ccc;
-      cursor: not-allowed;
-    }
-    
-    .search-bar {
-      height: 28px;
-      background: #ffffff;
-      border: 1px solid #d0d0d0;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 12px;
-      width: 100%;
-      max-width: 500px;
-    }
-    
-    .search-bar .lock-icon {
-      color: #666;
-      margin-right: 8px;
-      font-size: 12px;
-    }
-    
-    .search-bar .url {
-      font-size: 13px;
-      color: #333;
-      font-weight: 400;
-      text-align: center;
-      width: 100%;
-    }
-    
-    .nav-header {
-      background: transparent;
-      border-bottom: none;
-      padding: 1rem 0;
-      margin-top: 44px;
-      position: sticky;
-      top: 44px;
-      z-index: 100;
-    }
-    
-    .nav-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      align-items: center;
-    }
-    
-    .nav-links a {
-      text-decoration: none;
-      color: #767676;
-      font-weight: 400;
-      font-size: 0.8rem;
-      transition: color 0.2s ease;
-      position: relative;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      line-height: 1.2;
-      text-align: center;
-    }
-    
-    .nav-links a:hover {
-      color: #F791A9;
-    }
-    
-    .nav-links a.active {
-      color: #F791A9;
-    }
-    
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: white;
-      min-width: 120px;
-      box-shadow: 0px 4px 16px rgba(0,0,0,0.1);
-      border-radius: 6px;
-      z-index: 1;
-      top: 100%;
-      left: 0;
-      padding: 0.5rem 0;
-      border: 1px solid #e8e8e8;
-    }
-    
-    .dropdown-content a {
-      color: #767676;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      display: block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      transition: all 0.2s ease;
-    }
-    
-    .dropdown-content a:hover {
-      background-color: #F9F6F5;
-      color: #F791A9;
-    }
-    
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    
-    .dropdown > a::after {
-      content: ' ▼';
-      font-size: 0.6rem;
-      margin-left: 0.3rem;
-    }
-    
-    .main-content {
-      flex: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-      width: 100%;
-    }
-    
-    .project-item {
-      display: flex;
-      gap: 3rem;
-      margin-bottom: 4rem;
-      align-items: center;
-      animation: fadeInUp 0.8s ease-out both;
-    }
-    
-    .project-item:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-    
-    .project-item > * {
-      flex: 1;
-    }
-    
-    .project-item:nth-child(1) { animation-delay: 0.1s; }
-    .project-item:nth-child(2) { animation-delay: 0.2s; }
-    .project-item:nth-child(3) { animation-delay: 0.3s; }
-    .project-item:nth-child(4) { animation-delay: 0.4s; }
-    .project-item:nth-child(5) { animation-delay: 0.5s; }
-    .project-item:nth-child(6) { animation-delay: 0.6s; }
-    .project-item:nth-child(7) { animation-delay: 0.7s; }
-    .project-item:nth-child(8) { animation-delay: 0.8s; }
-    .project-item:nth-child(9) { animation-delay: 0.9s; }
-    
-    .project-image {
-      width: 100%;
-      height: auto;
-      min-height: 400px;
-      background: #E0E0E0;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #767676;
-      font-size: 1.2rem;
-      font-weight: 500;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .project-image img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-    
-    .project-image:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
-    
-    a .project-image {
-      cursor: pointer;
-    }
-    
-    a .project-image:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 32px rgba(247, 145, 169, 0.2);
-    }
-    
-    .project-description-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 0;
-    }
-    
-    .description-label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #767676;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .project-title {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #1E1E1E;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-    
-    .project-description {
-      font-size: 1rem;
-      color: #767676;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-    
-    .project-concepts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .concept-tag {
-      background: #F8DCDC;
-      color: #1E1E1E;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid rgba(247, 145, 169, 0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .concept-tag:hover {
-      background: #F791A9;
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(247, 145, 169, 0.3);
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @media (max-width: 1024px) {
-      .project-item > * {
-        flex: 1;
-      }
-      
-      .project-image {
-        min-width: 350px;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .mac-header {
-        padding: 0 12px;
-      }
-      
-      .search-bar {
-        max-width: 300px;
-        font-size: 11px;
-      }
-      
-      .search-bar .url {
-        font-size: 11px;
-      }
-      
-      .nav-header {
-        padding: 0.75rem 0;
-      }
-      
-      .nav-content {
-        padding: 0 1rem;
-      }
-      
-      .nav-links {
-        gap: 1rem;
-        font-size: 0.75rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .dropdown-content {
-        left: auto;
-        right: 0;
-      }
-      
-      .main-content {
-        padding: 2rem 1.5rem;
-      }
-      
-      .project-item {
-        flex-direction: column !important;
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-      }
-      
-      .project-item > * {
-        flex: none;
-        width: 100%;
-      }
-      
-      .project-image {
-        width: 100%;
-        height: 350px;
-        min-width: 100%;
-      }
-      
-      .project-description-section {
-        min-width: 100%;
-      }
-      
-      .project-title {
-        font-size: 1.6rem;
-      }
-      
-      .project-description {
-        font-size: 0.95rem;
-      }
-      
-      .concept-tag {
-        font-size: 0.8rem;
-        padding: 0.35rem 0.7rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .mac-header {
-        height: 40px;
-        padding: 0 8px;
-      }
-      
-      .traffic-light {
-        width: 10px;
-        height: 10px;
-      }
-      
-      .search-bar {
-        max-width: 200px;
-        height: 24px;
-        padding: 0 8px;
-      }
-      
-      .search-bar .url {
-        font-size: 10px;
-      }
-      
-      .nav-header {
-        margin-top: 40px;
-        padding: 0.5rem 0;
-      }
-      
-      .nav-links {
-        gap: 0.75rem;
-        font-size: 0.7rem;
-      }
-      
-      .main-content {
-        padding: 1.5rem 1rem;
-      }
-      
-      .project-item {
-        gap: 1.25rem;
-        margin-bottom: 2.5rem;
-      }
-      
-      .project-image {
-        height: 280px;
-      }
-      
-      .project-title {
-        font-size: 1.4rem;
-      }
-      
-      .project-description {
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
-      
-      .concept-tag {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.6rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioLens - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #FAF4F3;
+        }
+        
+        .mac-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-bottom: 1px solid #d0d0d0;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            gap: 12px;
+        }
+        
+        .mac-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mac-header-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .traffic-light.red {
+            background: linear-gradient(135deg, #ff5f57 0%, #ff3b30 100%);
+        }
+        
+        .traffic-light.yellow {
+            background: linear-gradient(135deg, #ffbd2e 0%, #ff9500 100%);
+        }
+        
+        .traffic-light.green {
+            background: linear-gradient(135deg, #28ca42 0%, #30d158 100%);
+        }
+        
+        .traffic-light:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-bar {
+            height: 28px;
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-bar .lock-icon {
+            color: #666;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+        
+        .search-bar .url {
+            font-size: 13px;
+            color: #333;
+            font-weight: 400;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .nav-header {
+            background: transparent;
+            border-bottom: none;
+            padding: 1rem 0;
+            margin-top: 44px;
+            position: sticky;
+            top: 44px;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #767676;
+            font-weight: 400;
+            font-size: 0.8rem;
+            transition: color 0.2s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .nav-links a:hover {
+            color: #F791A9;
+        }
+        
+        .nav-links a.active {
+            color: #F791A9;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 4px 16px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            padding: 0.5rem 0;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .dropdown-content a {
+            color: #767676;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #F9F6F5;
+            color: #F791A9;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.6rem;
+            margin-left: 0.3rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #767676;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            margin-top: 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-button:hover {
+            color: #F791A9;
+            transform: translateX(-4px);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 60px auto 0;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .project-description-short {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .under-construction {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .under-construction h2 {
+            font-size: 2.5rem;
+            color: #999;
+            font-style: normal;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .under-construction p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .mac-header {
+                padding: 0 12px;
+            }
+            
+            .search-bar {
+                max-width: 300px;
+                font-size: 11px;
+            }
+            
+            .search-bar .url {
+                font-size: 11px;
+            }
+            
+            .nav-header {
+                padding: 0.75rem 0;
+            }
+            
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.75rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .dropdown-content {
+                left: auto;
+                right: 0;
+            }
+            
+            .container {
+                padding: 2rem 1.5rem;
+                margin-top: 50px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+            
+            .project-description-short {
+                font-size: 16px;
+            }
+
+            .under-construction {
+                padding: 4rem 1rem;
+            }
+
+            .under-construction h2 {
+                font-size: 2rem;
+            }
+
+            .under-construction p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mac-header {
+                height: 40px;
+                padding: 0 8px;
+            }
+            
+            .traffic-light {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .search-bar {
+                max-width: 200px;
+                height: 24px;
+                padding: 0 8px;
+            }
+            
+            .search-bar .url {
+                font-size: 10px;
+            }
+            
+            .nav-header {
+                margin-top: 40px;
+                padding: 0.5rem 0;
+            }
+            
+            .nav-links {
+                gap: 0.75rem;
+                font-size: 0.7rem;
+            }
+            
+            .container {
+                padding: 1.5rem 1rem;
+                margin-top: 45px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .project-description-short {
+                font-size: 15px;
+            }
+
+            .under-construction {
+                padding: 3rem 1rem;
+            }
+
+            .under-construction h2 {
+                font-size: 1.6rem;
+            }
+
+            .under-construction p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="mac-header">
-    <div class="mac-header-left">
-      <div class="traffic-light red" onclick="handleTrafficLight('close')"></div>
-      <div class="traffic-light yellow" onclick="handleTrafficLight('minimize')"></div>
-      <div class="traffic-light green" onclick="handleTrafficLight('maximize')"></div>
-    </div>
-    <div class="mac-header-center">
-      <div class="search-bar">
-        <span class="lock-icon">🔒</span>
-        <span class="url">https://allaboutme.com/cs-projects</span>
-      </div>
-    </div>
-  </div>
-  
-  <div class="nav-header">
-    <div class="nav-content">
-      <nav>
-        <ul class="nav-links">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="about.html">About Me</a></li>
-          <li><a href="experiences.html">Experiences</a></li>
-          <li class="dropdown">
-            <a href="#projects">Projects</a>
-            <div class="dropdown-content">
-              <a href="design.html">Design</a>
-              <a href="cs.html" class="active">CS</a>
+    <div class="mac-header">
+        <div class="mac-header-left">
+            <div class="traffic-light red" onclick="handleTrafficLight('close')"></div>
+            <div class="traffic-light yellow" onclick="handleTrafficLight('minimize')"></div>
+            <div class="traffic-light green" onclick="handleTrafficLight('maximize')"></div>
+        </div>
+        <div class="mac-header-center">
+            <div class="search-bar">
+                <span class="lock-icon">🔒</span>
+                <span class="url">https://allaboutme.com/audiolens</span>
             </div>
-          </li>
-          <li><a href="hackathons.html">Hackathons</a></li>
-          <li><a href="designathons.html">Designathons</a></li>
-        </ul>
-      </nav>
+        </div>
     </div>
-  </div>
-  
-  <div class="main-content">
-    <div class="project-item">
-      <a href="audiolens.html" style="text-decoration: none; color: inherit; display: block;">
-        <div class="project-image">
-          <img src="assets/img/audiolens.png" alt="AudioLens">
-        </div>
-      </a>
-      <div class="project-description-section">
-        <h2 class="project-title">AudioLens</h2>
-        <p class="project-description">A Chrome extension concept that explores generating Spotify playlists from images by extracting track and artist information and mapping it to Spotify's catalog. Focused on problem definition, technical feasibility, and API-driven workflows rather than interface design.</p>
-        <div class="project-concepts">
-          <span class="concept-tag">Product Management</span>
-          <span class="concept-tag">Programming</span>
-          <span class="concept-tag">Spotify API</span>
-          <span class="concept-tag">Chrome Extension</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-item">
-      <a href="smarttodo.html" style="text-decoration: none; color: inherit; display: block;">
-        <div class="project-image">
-          <img src="assets/img/SmartTodo.png" alt="SmartTodo">
-        </div>
-      </a>
-      <div class="project-description-section">
-        <h2 class="project-title">SmartTodo</h2>
-        <p class="project-description">A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category. Features include dark mode, category management, progress tracking, and deadline-based filtering. Contributed as the sole developer and designer.</p>
-        <div class="project-concepts">
-          <span class="concept-tag">UI/UX Design</span>
-          <span class="concept-tag">Desktop App Development</span>
-          <span class="concept-tag">Electron</span>
-          <span class="concept-tag">Product Design</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function handleTrafficLight(action) {
-      const button = event.currentTarget;
-      button.style.transform = 'scale(0.9)';
-      setTimeout(() => {
-        button.style.transform = 'scale(1)';
-      }, 100);
-      
-      switch (action) {
-        case 'close':
-          document.body.style.opacity = '0.5';
-          setTimeout(() => {
-            document.body.style.opacity = '1';
-          }, 300);
-          break;
-        case 'minimize':
-          document.querySelector('.main-content').style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            document.querySelector('.main-content').style.transform = 'scale(1)';
-          }, 300);
-          break;
-        case 'maximize':
-          document.querySelector('.main-content').style.transform = 'scale(1.02)';
-          setTimeout(() => {
-            document.querySelector('.main-content').style.transform = 'scale(1)';
-          }, 300);
-          break;
-      }
-    }
     
-    function navigateTo(section) {
-      // Remove active class from all links
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-      });
-      
-      // Add active class to the clicked section
-      let activeLink;
-      switch(section) {
-        case 'experiences':
-          activeLink = document.querySelector('a[onclick="navigateTo(\'experiences\')"]');
-          break;
-        case 'projects':
-        case 'design-projects':
-        case 'cs-projects':
-          activeLink = document.querySelector('.dropdown > a');
-          break;
-        case 'hackathons':
-          activeLink = document.querySelector('a[onclick="navigateTo(\'hackathons\')"]');
-          break;
-        case 'designathons':
-          activeLink = document.querySelector('a[onclick="navigateTo(\'designathons\')"]');
-          break;
-      }
-      
-      if (activeLink) {
-        activeLink.classList.add('active');
-      }
-      
-      console.log(`Navigate to ${section}`);
-      // In a real app, you would navigate to the appropriate section here
-    }
-  </script>
+    <div class="nav-header">
+        <div class="nav-content">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="experiences.html">Experiences</a></li>
+                    <li class="dropdown">
+                        <a href="#projects">Projects</a>
+                        <div class="dropdown-content">
+                            <a href="design.html">Design</a>
+                            <a href="cs.html">CS</a>
+                        </div>
+                    </li>
+                    <li><a href="hackathons.html">Hackathons</a></li>
+                    <li><a href="designathons.html">Designathons</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+        
+    <div class="container">
+        <a href="cs.html" class="back-button">← Back to CS Projects</a>
+        
+        <div class="project-title-section">
+            <h1>AudioLens</h1>
+            <p class="project-description-short">A Chrome extension that helps users instantly turn music discovered in images into Spotify playlists, reducing friction between discovery and saving.</p>
+        </div>
+
+        <div class="under-construction">
+            <h2>🚧 Under Construction 🚧</h2>
+            <p>This project page is currently being built. Check back soon for updates!</p>
+        </div>
+
+        <!-- Content commented out for future use
+        
+        <video class="demo-video" controls preload="metadata">
+            <source src="assets/videos/audiolens-demo.mp4" type="video/mp4">
+            <source src="assets/videos/audiolens-demo.mov" type="video/quicktime">
+            Your browser does not support the video tag.
+        </video>
+
+        <section>
+            <h2>What problem this solves</h2>
+            <p>
+                Music discovery increasingly happens through images such as screenshots of playlists, Instagram stories, concert photos, and shared posts. However, saving those songs to Spotify is a manual and time-consuming process that requires switching apps and searching for each track individually.
+            </p>
+            <p>
+                AudioLens addresses this gap by allowing users to capture text from images and convert it directly into Spotify playlists. By shortening the path from discovery to action, the product helps users preserve music they care about before it gets lost.
+            </p>
+        </section>
+
+        <section>
+            <h2>Features</h2>
+            <ul>
+                <li>Extracts song titles and artists from screenshots and photos using OCR</li>
+                <li>Identifies valid tracks through Spotify search</li>
+                <li>Creates a new Spotify playlist in one flow</li>
+                <li>Adds songs to an existing playlist if preferred</li>
+                <li>Connects securely to a user's Spotify account</li>
+                <li>Surfaces unmatched songs for user review</li>
+                <li>Designed as a lightweight Chrome extension for fast, in-context use</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Technical overview</h2>
+            <p>
+                AudioLens is built as a Chrome extension to align with where music discovery actually happens. Users upload or capture an image, which is processed through OCR to extract visible text. The system then parses potential song and artist pairs and validates them through the Spotify Web API.
+            </p>
+            <p>
+                Once matches are confirmed, users can either create a new playlist or append tracks to an existing one. The architecture prioritizes low latency and minimal user input so saving music feels immediate rather than disruptive.
+            </p>
+        </section>
+
+        <section>
+            <h2>Key product + technical decisions</h2>
+            <ul>
+                <li><strong>Chrome extension as the core surface:</strong> The product was designed to live in the browser so users can act on music discovery without leaving the page where it happens.</li>
+                <li><strong>Image-based input instead of audio:</strong> Screenshots are a common real-world behavior for saving music, so the product was intentionally built around images rather than live audio or recordings.</li>
+                <li><strong>User confirmation before playlist creation:</strong> A review step was added to prevent incorrect song matches and maintain trust.</li>
+                <li><strong>Spotify-focused MVP:</strong> Limiting scope to one platform reduced complexity and allowed faster validation of the core user workflow.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Challenges & learnings</h2>
+            <p>
+                The main challenge was handling inconsistent and incomplete text from images. Song titles are often truncated, misspelled, or missing artist context, which required careful parsing and fallback logic.
+            </p>
+            <p>
+                From a product perspective, this project reinforced the value of tight scoping. By focusing on a single clear use case and platform, it became easier to evaluate whether the product solved a real problem before expanding features or integrations.
+            </p>
+        </section>
+
+        <section>
+            <h2>Tech stack</h2>
+            <div class="tech-stack">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Chrome Extensions API</span>
+                <span class="tech-tag">OCR</span>
+                <span class="tech-tag">Spotify Web API</span>
+                <span class="tech-tag">OAuth 2.0</span>
+                <span class="tech-tag">HTML / CSS</span>
+                <span class="tech-tag">Manifest V3</span>
+            </div>
+        </section>
+        
+        -->
+    </div>
+    
+    <script>
+        function handleTrafficLight(action) {
+            const button = event.currentTarget;
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+            
+            switch (action) {
+                case 'close':
+                    document.body.style.opacity = '0.5';
+                    setTimeout(() => {
+                        document.body.style.opacity = '1';
+                    }, 300);
+                    break;
+                case 'minimize':
+                    document.querySelector('.container').style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        document.querySelector('.container').style.transform = 'scale(1)';
+                    }, 300);
+                    break;
+                case 'maximize':
+                    document.querySelector('.container').style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        document.querySelector('.container').style.transform = 'scale(1)';
+                    }, 300);
+                    break;
+            }
+        }
+    </script>
 </body>
 </html>

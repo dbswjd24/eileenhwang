@@ -4,7 +4,54 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <script src="tesseract/tesseract.min.js"></script>
-    <script src="offscreen.js"></script>
+    <script>
+        // Load Tesseract using chrome.runtime.getURL for proper extension context
+        (function() {
+            // Ensure self is available (for UMD wrapper)
+            if (typeof self === 'undefined') {
+                window.self = window;
+            }
+            
+            const tesseractScript = document.createElement('script');
+            tesseractScript.src = chrome.runtime.getURL('tesseract/tesseract.min.js');
+            tesseractScript.async = false;
+            tesseractScript.defer = false;
+            
+            tesseractScript.onload = function() {
+                console.log('Tesseract script loaded, checking for Tesseract object...');
+                // Wait for Tesseract to be available - check both window and self
+                let attempts = 0;
+                const maxAttempts = 100;
+                const checkTesseract = setInterval(() => {
+                    attempts++;
+                    // Check for Tesseract in various possible locations
+                    const tesseract = window.Tesseract || self.Tesseract || Tesseract;
+                    if (typeof tesseract !== 'undefined' && tesseract.createWorker) {
+                        console.log('Tesseract is available');
+                        // Make sure it's globally accessible
+                        if (!window.Tesseract) window.Tesseract = tesseract;
+                        if (!self.Tesseract) self.Tesseract = tesseract;
+                        clearInterval(checkTesseract);
+                        // Now load offscreen.js
+                        const offscreenScript = document.createElement('script');
+                        offscreenScript.src = chrome.runtime.getURL('offscreen.js');
+                        document.body.appendChild(offscreenScript);
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkTesseract);
+                        console.error('Tesseract failed to initialize after timeout.');
+                        console.error('typeof window.Tesseract:', typeof window.Tesseract);
+                        console.error('typeof self.Tesseract:', typeof self.Tesseract);
+                        console.error('typeof Tesseract:', typeof Tesseract);
+                    }
+                }, 50);
+            };
+            
+            tesseractScript.onerror = function(error) {
+                console.error('Failed to load Tesseract library:', error);
+            };
+            
+            document.head.appendChild(tesseractScript);
+        })();
+    </script>
 </body>
 </html>
