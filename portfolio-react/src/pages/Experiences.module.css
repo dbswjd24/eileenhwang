@@ -1,0 +1,128 @@
+.mainContent {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #F791A9 0%, #F8DCDC 100%);
+}
+
+.experienceItem {
+  position: relative;
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.experienceItem::before {
+  content: '';
+  position: absolute;
+  left: -3.4rem;
+  top: 0.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #F791A9;
+  border: 3px solid #FAF4F3;
+  box-shadow: 0 0 0 2px #F791A9;
+}
+
+.experienceCard {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experienceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(247, 145, 169, 0.2);
+}
+
+.experienceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.experienceTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin-bottom: 0.5rem;
+}
+
+.experienceCompany {
+  font-size: 1rem;
+  color: #F791A9;
+  font-weight: 500;
+}
+
+.experienceDate {
+  font-size: 0.9rem;
+  color: #767676;
+  font-weight: 500;
+  background: #F8DCDC;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.experienceDescription {
+  font-size: 0.95rem;
+  color: #767676;
+  line-height: 1.8;
+}
+
+.experienceDescription p {
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.experienceDescription p::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #F791A9;
+  font-weight: bold;
+}
+
+.experienceDescription p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .mainContent { padding: 2rem 1.5rem; }
+  .timeline { padding-left: 2rem; }
+  .experienceItem::before { left: -2.4rem; }
+  .experienceCard { padding: 1.5rem; }
+  .experienceHeader { flex-direction: column; align-items: flex-start; }
+  .experienceTitle { font-size: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+  .mainContent { padding: 1.5rem 1rem; }
+  .timeline { padding-left: 1.5rem; }
+  .experienceItem::before { left: -1.9rem; }
+  .experienceCard { padding: 1.25rem; }
+  .experienceTitle { font-size: 1.2rem; }
+  .experienceDescription { font-size: 0.9rem; }
+}

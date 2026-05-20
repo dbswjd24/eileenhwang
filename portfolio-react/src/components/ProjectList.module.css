@@ -1,0 +1,125 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectItem {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: center;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.projectItem:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.projectItem > * {
+  flex: 1;
+}
+
+.imageLink {
+  display: block;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.projectImage {
+  width: 100%;
+  height: 300px;
+  background: #E0E0E0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projectImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.projectImage:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.imageLink .projectImage:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 32px rgba(247, 145, 169, 0.2);
+}
+
+.descSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.projectTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.projectDescription {
+  font-size: 1rem;
+  color: #767676;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.concepts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.conceptTag {
+  background: #F8DCDC;
+  color: #1E1E1E;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(247, 145, 169, 0.3);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.conceptTag:hover {
+  background: #F791A9;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(247, 145, 169, 0.3);
+}
+
+@media (max-width: 768px) {
+  .projectItem {
+    flex-direction: column !important;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .projectItem > *, .imageLink { flex: none; width: 100%; }
+  .projectImage { height: 250px; }
+  .descSection { min-width: 100%; }
+  .projectTitle { font-size: 1.6rem; }
+  .projectDescription { font-size: 0.95rem; }
+  .conceptTag { font-size: 0.8rem; padding: 0.35rem 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .projectItem { gap: 1.25rem; margin-bottom: 2.5rem; }
+  .projectImage { height: 200px; }
+  .projectTitle { font-size: 1.4rem; }
+  .projectDescription { font-size: 0.9rem; line-height: 1.6; }
+  .conceptTag { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+}
