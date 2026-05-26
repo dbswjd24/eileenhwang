@@ -7,7 +7,7 @@ export default function About() {
       <main className={`page-main ${styles.mainContent}`}>
         <div className={styles.profileSection}>
           <img
-            src="/eileenhwang/pages/assets/img/EileenHwang.png"
+            src="/eileenhwang/pages/assets/img/EileenHwang.jpg"
             alt="Eileen Hwang Profile Picture"
             className={styles.profileImage}
           />
@@ -45,7 +45,7 @@ export default function About() {
                 className={styles.socialLink}
               >
                 <img
-                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"
+                  src="/eileenhwang/linkedin.svg"
                   alt="LinkedIn"
                   style={{ filter: 'invert(27%) sepia(96%) saturate(1982%) hue-rotate(195deg) brightness(93%) contrast(101%)' }}
                 />
@@ -57,9 +57,8 @@ export default function About() {
                 className={styles.socialLink}
               >
                 <img
-                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+                  src="/eileenhwang/github.svg"
                   alt="GitHub"
-                  style={{ filter: 'invert(13%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)' }}
                 />
               </a>
             </div>
