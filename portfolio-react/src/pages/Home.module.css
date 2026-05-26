@@ -18,6 +18,13 @@
   margin-bottom: 3rem;
 }
 
+.heroImage {
+  width: 160px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
 .mainTitle {
   font-size: 3.5rem;
   font-weight: 700;
