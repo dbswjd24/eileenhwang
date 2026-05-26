@@ -2,14 +2,13 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import styles from './Home.module.css';
-import heroImg from '../assets/hero.png';
 
 const folders = [
-  { id: 'about',       label: 'About Me',      path: '/about' },
-  { id: 'experiences', label: 'Experiences',   path: '/experiences' },
-  { id: 'projects',    label: 'Projects',      path: '/projects/cs' },
-  { id: 'hackathons',  label: 'Hackathons',    path: '/hackathons' },
-  { id: 'designathons',label: 'Designathons',  path: '/designathons' },
+  { id: 'about',        label: 'About Me',        path: '/about' },
+  { id: 'cs',           label: 'CS Projects',      path: '/projects/cs' },
+  { id: 'design',       label: 'Design Projects',  path: '/projects/design' },
+  { id: 'hackathons',   label: 'Hackathons',       path: '/hackathons' },
+  { id: 'designathons', label: 'Designathons',     path: '/designathons' },
 ];
 
 export default function Home() {
@@ -48,7 +47,6 @@ export default function Home() {
       <main className={`page-main ${styles.mainContent}`}>
         <div className={styles.mainContainer}>
           <div className={styles.header}>
-            <img src={heroImg} alt="folder" className={styles.heroImage} />
             <h1 className={styles.mainTitle}>All About Me</h1>
             <p className={styles.subtitle}>
               A look into my passions, interests, and the things that shape me
