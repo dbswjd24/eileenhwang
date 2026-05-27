@@ -1,0 +1,346 @@
+.container {
+  max-width: 900px;
+  margin: 60px auto 0;
+  padding: 60px 40px 80px;
+  position: relative;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #767676;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+}
+
+.backButton:hover {
+  color: #F791A9;
+  transform: translateX(-4px);
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.iconTitle {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.projectMeta {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.rolesRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.role {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1.5px solid #666;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+}
+
+.introText {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.projectDescriptionShort {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.sectionHeading {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  color: #000;
+  font-style: italic;
+}
+
+.bodyText {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.bodyList {
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.bodyList li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.featureSection {
+  margin-top: 40px;
+}
+
+.featureItem {
+  margin-bottom: 25px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.featureTitle {
+  font-weight: 600;
+  color: #000;
+}
+
+.projectImage {
+  width: 100%;
+  border-radius: 12px;
+  margin: 40px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.projectImageSmall {
+  width: 100%;
+  border-radius: 12px;
+  margin: 30px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.demoVideo {
+  width: 100%;
+  border-radius: 12px;
+  margin: 40px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: #000;
+  display: block;
+}
+
+.githubLink {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 12px 24px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+}
+
+.githubLink:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.techTag {
+  background: #E8E8E8;
+  color: #666;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.achievement {
+  padding: 30px;
+  border-radius: 12px;
+  margin: 40px 0;
+  border: 2px solid #e0e0e0;
+  background-color: #ffffff;
+}
+
+.achievement h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #000;
+}
+
+.achievement p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 0;
+}
+
+.underConstruction {
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.underConstruction h2 {
+  font-size: 2.5rem;
+  color: #999;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.underConstruction p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
+    margin-top: 50px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .sectionHeading {
+    font-size: 24px;
+  }
+
+  .iconTitle {
+    font-size: 36px;
+  }
+
+  .projectMeta {
+    font-size: 14px;
+  }
+
+  .introText {
+    font-size: 15px;
+  }
+
+  .projectDescriptionShort {
+    font-size: 16px;
+  }
+
+  .projectImage,
+  .projectImageSmall {
+    margin: 30px 0;
+  }
+
+  .underConstruction {
+    padding: 4rem 1rem;
+  }
+
+  .underConstruction h2 {
+    font-size: 2rem;
+  }
+
+  .underConstruction p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 1rem;
+    margin-top: 45px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .sectionHeading {
+    font-size: 20px;
+  }
+
+  .iconTitle {
+    font-size: 32px;
+  }
+
+  .projectMeta {
+    font-size: 13px;
+  }
+
+  .role {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .introText {
+    font-size: 14px;
+  }
+
+  .projectDescriptionShort {
+    font-size: 15px;
+  }
+
+  .bodyText,
+  .bodyList li,
+  .featureItem {
+    font-size: 15px;
+  }
+
+  .techTag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .githubLink {
+    font-size: 12px;
+    padding: 10px 18px;
+  }
+
+  .projectImage,
+  .projectImageSmall {
+    margin: 20px 0;
+  }
+
+  .underConstruction {
+    padding: 3rem 1rem;
+  }
+
+  .underConstruction h2 {
+    font-size: 1.6rem;
+  }
+
+  .underConstruction p {
+    font-size: 0.95rem;
+  }
+}
