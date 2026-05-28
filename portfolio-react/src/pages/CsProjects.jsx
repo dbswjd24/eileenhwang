@@ -12,6 +12,14 @@ const projects = [
     tags: ['Product Management', 'Programming', 'Spotify API', 'Chrome Extension'],
   },
   {
+    title: 'Filmed Here',
+    image: '/eileenhwang/pages/assets/img/memorygame.png',
+    link: '/projects/filmedhere',
+    description:
+      'A web app that lets users discover filming locations from their favorite movies and TV shows. Browse iconic scenes, explore locations on an interactive map, and plan visits to the real-world spots behind the screen.',
+    tags: ['Web Development', 'Maps API', 'React', 'Full Stack'],
+  },
+  {
     title: 'SmartTodo',
     image: '/eileenhwang/pages/assets/img/SmartTodo.png',
     link: '/projects/smarttodo',

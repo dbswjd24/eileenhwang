@@ -19,7 +19,7 @@ export default function About() {
           </p>
 
           <p className={styles.description}>
-            I am a passionate UI/UX designer, front-end developer, and aspiring product manager
+            I am a passionate UI/UX designer, software engineer, and aspiring product manager
             dedicated to creating digital solutions that enhance user engagement and streamline
             processes. With a strong background in computer science and design, I specialize in
             developing intuitive, responsive, and visually appealing applications.

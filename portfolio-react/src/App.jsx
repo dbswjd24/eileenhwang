@@ -16,6 +16,7 @@ import Womp from './pages/Womp';
 import GoodNotes from './pages/GoodNotes';
 import Food from './pages/Food';
 import PathPilot from './pages/PathPilot';
+import FilmedHere from './pages/FilmedHere';
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/projects/goodnotes" element={<GoodNotes />} />
         <Route path="/projects/food" element={<Food />} />
         <Route path="/projects/pathpilot" element={<PathPilot />} />
+        <Route path="/projects/filmedhere" element={<FilmedHere />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </HashRouter>

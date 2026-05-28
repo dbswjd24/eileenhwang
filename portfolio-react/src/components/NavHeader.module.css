@@ -65,7 +65,8 @@
   border-radius: 6px;
   z-index: 200;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 0.5rem 0;
   border: 1px solid #e8e8e8;
 }
@@ -79,6 +80,7 @@
   text-transform: uppercase;
   letter-spacing: 0.3px;
   transition: all 0.2s ease;
+  text-align: center;
 }
 
 .dropdownContent a:hover {
