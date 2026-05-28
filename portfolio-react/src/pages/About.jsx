@@ -7,7 +7,7 @@ export default function About() {
       <main className={`page-main ${styles.mainContent}`}>
         <div className={styles.profileSection}>
           <img
-            src="/eileenhwang/pages/assets/img/EileenHwang.jpg"
+            src="/eileenhwang/pages/assets/img/headshot.jpg"
             alt="Eileen Hwang Profile Picture"
             className={styles.profileImage}
           />

@@ -24,7 +24,6 @@ export default function SmartTodo() {
         </div>
 
         <video className={styles.demoVideo} controls preload="metadata">
-          <source src="/eileenhwang/pages/assets/videos/smarttodo-demo.mp4" type="video/mp4" />
           <source src="/eileenhwang/pages/assets/videos/smarttodo-demo.mov" type="video/quicktime" />
           Your browser does not support the video tag.
         </video>
