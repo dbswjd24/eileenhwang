@@ -1,1 +1,8 @@
 .DS_Store
+.gstack/
+.claude/
+
+# React / Node
+portfolio-react/node_modules/
+portfolio-react/dist/
+portfolio-react/.claude/
