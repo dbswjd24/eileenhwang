@@ -9,16 +9,18 @@
   "action": {
     "default_popup": "popup.html"
   },
-  "oauth2": {
-    "client_id": "af78655285d7400d8349580c2c70c292",
-    "scopes": ["playlist-modify-public", "playlist-modify-private", "user-read-private"]
-  },
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self';"
   },
   "web_accessible_resources": [
     {
-      "resources": ["tesseract/*", "offscreen.html", "offscreen.js"],
+      "resources": [
+        "tesseract/*",
+        "offscreen.html",
+        "offscreen.js",
+        "offscreen-init.js",
+        "offscreen-setup.js"
+      ],
       "matches": ["<all_urls>"]
     }
   ]

@@ -1,8 +1,31 @@
 const CLIENT_ID = "af78655285d7400d8349580c2c70c292";
 
+let offscreenReady = false;
+let offscreenReadyError = null;
+let offscreenReadyPromise = null;
+let offscreenReadyResolver = null;
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if (msg.type === 'OFFSCREEN_READY') {
+        offscreenReady = msg.ok === true;
+        offscreenReadyError = msg.error || null;
+        if (offscreenReadyResolver) {
+            if (msg.ok) {
+                offscreenReadyResolver();
+            } else {
+                offscreenReadyResolver(new Error(msg.error || 'Offscreen document failed to initialize'));
+            }
+            offscreenReadyResolver = null;
+            offscreenReadyPromise = null;
+        }
+        sendResponse({ ok: true });
+        return true;
+    }
+
     if (msg.type === "OCR_IMAGE") {
-        handleOCR(msg.dataUrl).then(sendResponse);
+        handleOCR(msg.dataUrl)
+            .then(sendResponse)
+            .catch(error => sendResponse({ error: error.message || String(error) }));
         return true;
     }
     if (msg.type === "SPOTIFY_LOGIN") {
@@ -59,18 +82,64 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
 });
 
+async function waitForOffscreenReady() {
+    if (offscreenReady) return;
+    if (offscreenReadyError) {
+        throw new Error('Offscreen document initialization failed: ' + offscreenReadyError);
+    }
+
+    if (!offscreenReadyPromise) {
+        offscreenReadyPromise = new Promise((resolve, reject) => {
+            offscreenReadyResolver = (error) => {
+                if (error) reject(error);
+                else resolve();
+            };
+        });
+    }
+
+    const timeout = setTimeout(() => {
+        if (offscreenReadyResolver) {
+            offscreenReadyResolver(new Error('Offscreen document did not become ready in time'));
+            offscreenReadyResolver = null;
+            offscreenReadyPromise = null;
+        }
+    }, 10000);
+
+    try {
+        await offscreenReadyPromise;
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
 async function handleOCR(dataUrl) {
     const existing = await chrome.offscreen.hasDocument();
     if (!existing) {
-        await chrome.offscreen.createDocument({ 
-            url: chrome.runtime.getURL("offscreen.html"), 
-            reasons: ["DOM_SCRAPING"], 
-            justification: "OCR" 
+        offscreenReady = false;
+        await chrome.offscreen.createDocument({
+            url: chrome.runtime.getURL("offscreen.html"),
+            reasons: ["DOM_SCRAPING"],
+            justification: "OCR"
         });
-        // Give the offscreen document time to load scripts
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await waitForOffscreenReady();
     }
-    return chrome.runtime.sendMessage({ target: "offscreen", type: "process-ocr", data: dataUrl });
+
+    return new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage(
+            { target: "offscreen", type: "process-ocr", data: dataUrl },
+            (response) => {
+                if (chrome.runtime.lastError) {
+                    reject(new Error(chrome.runtime.lastError.message));
+                } else if (!response) {
+                    reject(new Error('No response from OCR worker'));
+                } else if (response.error) {
+                    reject(new Error(response.error));
+                } else {
+                    resolve(response);
+                }
+            }
+        );
+    });
 }
 
 async function syncTracks(tracks) {

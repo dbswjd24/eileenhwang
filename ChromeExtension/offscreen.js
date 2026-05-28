@@ -1,53 +1,69 @@
-let workerPromise;
+console.log('offscreen.js: Script loaded and ready');
 
-// Wait for Tesseract to be available
-function waitForTesseract() {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message?.target !== 'offscreen') return false;
+  if (message.type === 'ping') {
+    sendResponse({ ok: true });
+    return true;
+  }
+  return false;
+});
+
+function dataURLToCanvas(dataURL) {
   return new Promise((resolve, reject) => {
-    let attempts = 0;
-    const maxAttempts = 100; // 5 seconds max wait
-    
-    const check = setInterval(() => {
-      attempts++;
-      if (typeof Tesseract !== 'undefined' && Tesseract.createWorker) {
-        clearInterval(check);
-        resolve();
-      } else if (attempts >= maxAttempts) {
-        clearInterval(check);
-        reject(new Error("Tesseract failed to load after timeout"));
-      }
-    }, 50);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      resolve(canvas);
+    };
+    img.onerror = () => reject(new Error('Failed to load image for OCR'));
+    img.src = dataURL;
   });
-}
-
-async function getWorker() {
-  if (workerPromise) return workerPromise;
-  workerPromise = (async () => {
-    await waitForTesseract();
-    if (typeof Tesseract === 'undefined') throw new Error("Tesseract not loaded");
-    const worker = await Tesseract.createWorker({
-      workerPath: chrome.runtime.getURL('tesseract/worker.min.js'),
-      corePath: chrome.runtime.getURL('tesseract/tesseract-core.wasm.js'),
-      langPath: chrome.runtime.getURL('tesseract/'),
-      gzip: false, 
-      logger: m => console.log(m)
-    });
-    await worker.loadLanguage('eng+kor');
-    await worker.initialize('eng+kor');
-    return worker;
-  })();
-  return workerPromise;
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.target !== 'offscreen' || message.type !== 'process-ocr') return false;
+
   (async () => {
     try {
-      const worker = await getWorker();
-      const { data: { text } } = await worker.recognize(message.data);
+      const Tesseract = window.Tesseract || self.Tesseract;
+      if (!Tesseract) throw new Error('Tesseract not loaded');
+
+      const workerURL = chrome.runtime.getURL('tesseract/worker-wrapper.js');
+      const NativeWorker = window.Worker;
+      function ExtWorker(url, opts) {
+        if (typeof url === 'string' && url.startsWith('blob:')) url = workerURL;
+        return new NativeWorker(url, opts);
+      }
+      ExtWorker.prototype = NativeWorker.prototype;
+      window.Worker = ExtWorker;
+
+      const canvas = await dataURLToCanvas(message.data);
+
+      const { data: { text } } = await Tesseract.recognize(
+        canvas,
+        'eng+kor',
+        {
+          workerPath: workerURL,
+          workerBlobURL: false,
+          corePath: chrome.runtime.getURL('tesseract/'),
+          langPath: chrome.runtime.getURL('tesseract/'),
+          gzip: false,
+          cacheMethod: 'none',
+          logger: m => console.log('[Tesseract]', m.status, m.progress),
+        }
+      );
+
+      console.log('OCR complete, text length:', text?.length);
       sendResponse({ text: text || '' });
     } catch (err) {
-      sendResponse({ error: err.message });
+      console.error('OCR error:', err);
+      sendResponse({ error: err.message || String(err) });
     }
   })();
-  return true; 
+
+  return true;
 });
