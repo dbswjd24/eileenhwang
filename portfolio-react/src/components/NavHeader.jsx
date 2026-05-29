@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './NavHeader.module.css';
 
 export default function NavHeader() {
   const location = useLocation();
   const [projectsOpen, setProjectsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const isActive = (path) => location.pathname === path;
   const isProjectsActive = isActive('/projects/design') || isActive('/projects/cs');
 
   return (
-    <div className={styles.navHeader}>
+    <div className={`${styles.navHeader} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.navContent}>
         <nav>
           <ul className={styles.navLinks}>
