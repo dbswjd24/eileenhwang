@@ -11,7 +11,7 @@ export default function FilmedHere() {
         <div className={styles.header}>
           <div className={styles.iconTitle}>🎬🗺️</div>
           <h1 className={styles.title}>Filmed Here</h1>
-          <
+          <a
             href="#"
             className={styles.githubLink}
           >
