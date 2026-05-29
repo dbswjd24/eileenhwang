@@ -11,12 +11,7 @@ export default function FilmedHere() {
         <div className={styles.header}>
           <div className={styles.iconTitle}>🎬🗺️</div>
           <h1 className={styles.title}>Filmed Here</h1>
-          <p className={styles.projectMeta}>2025.05</p>
-          <div className={styles.rolesRow}>
-            <span className={styles.role}>Software Engineer</span>
-            <span className={styles.role}>Full Stack</span>
-          </div>
-          <a
+          <
             href="#"
             className={styles.githubLink}
           >
