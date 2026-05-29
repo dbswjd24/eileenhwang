@@ -13,7 +13,7 @@ const projects = [
   },
   {
     title: 'Filmed Here',
-    image: '/eileenhwang/pages/assets/img/memorygame.png',
+    image: '/eileenhwang/pages/assets/img/filmedhere.png',
     link: '/projects/filmedhere',
     description:
       'A web app that lets users discover filming locations from their favorite movies and TV shows. Browse iconic scenes, explore locations on an interactive map, and plan visits to the real-world spots behind the screen.',
