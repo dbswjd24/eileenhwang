@@ -8,8 +8,8 @@ const projects = [
     image: '/eileenhwang/pages/assets/img/audiolens.png',
     link: '/projects/audiolens',
     description:
-      'A Chrome extension concept that explores generating Spotify playlists from images by extracting track and artist information and mapping it to Spotify\'s catalog. Focused on problem definition, technical feasibility, and API-driven workflows rather than interface design.',
-    tags: ['Product Management', 'Programming', 'Spotify API', 'Chrome Extension'],
+      'A Chrome extension (v2) that detects timestamped tracklists from YouTube video descriptions and converts them into Spotify playlists in one click. Falls back to screenshot OCR for tracklists found in comments or images.',
+    tags: ['Chrome Extension', 'Spotify API', 'OCR', 'JavaScript'],
   },
   {
     title: 'Filmed Here',

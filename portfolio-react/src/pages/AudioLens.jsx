@@ -11,7 +11,7 @@ export default function AudioLens() {
         <div className={styles.header}>
           <h1 className={styles.title}>AudioLens</h1>
           <p className={styles.projectDescriptionShort}>
-            A Chrome extension that helps users instantly turn music discovered in images into Spotify playlists, reducing friction between discovery and saving.
+            A Chrome extension (v2) that detects tracklists from YouTube videos and turns them into Spotify playlists in one click — with screenshot OCR as a fallback.
           </p>
         </div>
 
@@ -24,53 +24,53 @@ export default function AudioLens() {
         <section>
           <h2 className={styles.sectionHeading}>What problem this solves</h2>
           <p className={styles.bodyText}>
-            Music discovery increasingly happens through images such as screenshots of playlists, Instagram stories, concert photos, and shared posts. However, saving those songs to Spotify is a manual and time-consuming process that requires switching apps and searching for each track individually.
+            YouTube is one of the biggest surfaces for music discovery — DJ sets, curated mixes, and playlist videos often include full tracklists in the video description. But saving those songs to Spotify means manually searching each one, which is slow and tedious.
           </p>
           <p className={styles.bodyText}>
-            AudioLens addresses this gap by allowing users to capture text from images and convert it directly into Spotify playlists. By shortening the path from discovery to action, the product helps users preserve music they care about before it gets lost.
+            AudioLens v2 solves this by automatically reading the video description for timestamped tracklists and converting them into a Spotify playlist in seconds. For cases where the tracklist lives in a pinned comment or a screenshot, the extension falls back to OCR to extract the tracks from any image.
           </p>
         </section>
 
         <section>
           <h2 className={styles.sectionHeading}>Features</h2>
           <ul className={styles.bodyList}>
-            <li>Extracts song titles and artists from screenshots and photos using OCR</li>
-            <li>Identifies valid tracks through Spotify search</li>
-            <li>Creates a new Spotify playlist in one flow</li>
-            <li>Adds songs to an existing playlist if preferred</li>
-            <li>Connects securely to a user's Spotify account</li>
-            <li>Surfaces unmatched songs for user review</li>
-            <li>Designed as a lightweight Chrome extension for fast, in-context use</li>
+            <li>Auto-detects timestamped tracklists from YouTube video descriptions</li>
+            <li>Falls back to screenshot OCR when no tracklist is found in the description</li>
+            <li>Editable track list — fix titles or artists before syncing</li>
+            <li>Names the playlist after the video title automatically</li>
+            <li>Creates a new Spotify playlist and opens it directly in Spotify on success</li>
+            <li>Connects securely to a user's Spotify account via OAuth 2.0</li>
+            <li>Source tag shows whether tracks came from YouTube or a screenshot</li>
           </ul>
         </section>
 
         <section>
           <h2 className={styles.sectionHeading}>Technical overview</h2>
           <p className={styles.bodyText}>
-            AudioLens is built as a Chrome extension to align with where music discovery actually happens. Users upload or capture an image, which is processed through OCR to extract visible text. The system then parses potential song and artist pairs and validates them through the Spotify Web API.
+            The extension uses a content script to read the active YouTube video's description and parse timestamped lines into track/artist pairs. When no tracklist is found, users can upload a screenshot which is processed by Tesseract.js (running locally via WebAssembly) to extract text through OCR.
           </p>
           <p className={styles.bodyText}>
-            Once matches are confirmed, users can either create a new playlist or append tracks to an existing one. The architecture prioritizes low latency and minimal user input so saving music feels immediate rather than disruptive.
+            Parsed tracks are validated and added to Spotify through the Spotify Web API. Authentication uses Chrome's identity API with OAuth 2.0. All heavy OCR work runs in an offscreen document to avoid blocking the extension popup.
           </p>
         </section>
 
         <section>
-          <h2 className={styles.sectionHeading}>Key product + technical decisions</h2>
+          <h2 className={styles.sectionHeading}>Key decisions</h2>
           <ul className={styles.bodyList}>
-            <li><strong>Chrome extension as the core surface:</strong> The product was designed to live in the browser so users can act on music discovery without leaving the page where it happens.</li>
-            <li><strong>Image-based input instead of audio:</strong> Screenshots are a common real-world behavior for saving music, so the product was intentionally built around images rather than live audio or recordings.</li>
-            <li><strong>User confirmation before playlist creation:</strong> A review step was added to prevent incorrect song matches and maintain trust.</li>
-            <li><strong>Spotify-focused MVP:</strong> Limiting scope to one platform reduced complexity and allowed faster validation of the core user workflow.</li>
+            <li><strong>YouTube description as the primary source:</strong> Most DJ mixes and curated videos already include timestamped tracklists in the description — parsing this directly is faster and more accurate than OCR.</li>
+            <li><strong>OCR as a fallback, not the primary flow:</strong> v1 was entirely OCR-based. v2 flips the model — YouTube parsing is the happy path, OCR handles edge cases like pinned comments or external screenshots.</li>
+            <li><strong>Editable track list before syncing:</strong> A review step lets users correct parsing errors before the playlist is created, improving accuracy without requiring perfect parsing.</li>
+            <li><strong>Offscreen document for Tesseract:</strong> Running OCR in an offscreen document keeps the popup responsive and avoids Manifest V3 service worker limitations.</li>
           </ul>
         </section>
 
         <section>
           <h2 className={styles.sectionHeading}>Challenges &amp; learnings</h2>
           <p className={styles.bodyText}>
-            The main challenge was handling inconsistent and incomplete text from images. Song titles are often truncated, misspelled, or missing artist context, which required careful parsing and fallback logic.
+            Parsing timestamped tracklists from video descriptions required handling a wide range of formats — some videos use "00:00 Artist - Title", others flip the order, and some omit artists entirely. Building a parser robust enough to handle these variations without false positives was the core engineering challenge.
           </p>
           <p className={styles.bodyText}>
-            From a product perspective, this project reinforced the value of tight scoping. By focusing on a single clear use case and platform, it became easier to evaluate whether the product solved a real problem before expanding features or integrations.
+            Manifest V3's restrictions on background scripts also added complexity — moving OCR to an offscreen document was a key architectural decision to keep Tesseract.js (WebAssembly-based) working within the new extension model.
           </p>
         </section>
 
@@ -79,11 +79,12 @@ export default function AudioLens() {
           <div className={styles.techStack}>
             <span className={styles.techTag}>JavaScript</span>
             <span className={styles.techTag}>Chrome Extensions API</span>
-            <span className={styles.techTag}>OCR</span>
+            <span className={styles.techTag}>Manifest V3</span>
+            <span className={styles.techTag}>Tesseract.js (OCR)</span>
+            <span className={styles.techTag}>WebAssembly</span>
             <span className={styles.techTag}>Spotify Web API</span>
             <span className={styles.techTag}>OAuth 2.0</span>
             <span className={styles.techTag}>HTML / CSS</span>
-            <span className={styles.techTag}>Manifest V3</span>
           </div>
         </section>
       </div>
