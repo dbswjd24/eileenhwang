@@ -8,7 +8,7 @@ export default function NavHeader() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -40,8 +40,8 @@ export default function NavHeader() {
               </span>
               {projectsOpen && (
                 <div className={styles.dropdownContent}>
-                  <Link to="/projects/design" onClick={() => setProjectsOpen(false)}>Design</Link>
                   <Link to="/projects/cs" onClick={() => setProjectsOpen(false)}>CS</Link>
+                  <Link to="/projects/design" onClick={() => setProjectsOpen(false)}>Design</Link>
                 </div>
               )}
             </li>
