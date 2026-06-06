@@ -12,7 +12,7 @@ export default function AudioLens() {
           <div className={styles.iconTitle}>🎵📸</div>
           <h1 className={styles.title}>AudioLens</h1>
           <p className={styles.projectDescriptionShort}>
-            A Chrome extension (v2) that detects tracklists from YouTube videos and turns them into Spotify playlists in one click — with screenshot OCR as a fallback.
+            A Chrome extension that detects tracklists from YouTube videos and turns them into Spotify playlists in one click, with screenshot OCR as a fallback.
           </p>
         </div>
 
@@ -25,10 +25,10 @@ export default function AudioLens() {
         <section>
           <h2 className={styles.sectionHeading}>What problem this solves</h2>
           <p className={styles.bodyText}>
-            YouTube is one of the biggest surfaces for music discovery — DJ sets, curated mixes, and playlist videos often include full tracklists in the video description. But saving those songs to Spotify means manually searching each one, which is slow and tedious.
+            YouTube is one of the biggest surfaces for music discovery. DJ sets, curated mixes, and playlist videos often include full tracklists in the video description, but saving those songs to Spotify means manually searching each one, which is slow and tedious.
           </p>
           <p className={styles.bodyText}>
-            AudioLens v2 solves this by automatically reading the video description for timestamped tracklists and converting them into a Spotify playlist in seconds. For cases where the tracklist lives in a pinned comment or a screenshot, the extension falls back to OCR to extract the tracks from any image.
+            AudioLens solves this by automatically reading the video description for timestamped tracklists and converting them into a Spotify playlist in seconds. For cases where the tracklist lives in a pinned comment or a screenshot, the extension falls back to OCR to extract the tracks from any image.
           </p>
         </section>
 
@@ -37,7 +37,7 @@ export default function AudioLens() {
           <ul className={styles.bodyList}>
             <li>Auto-detects timestamped tracklists from YouTube video descriptions</li>
             <li>Falls back to screenshot OCR when no tracklist is found in the description</li>
-            <li>Editable track list — fix titles or artists before syncing</li>
+            <li>Editable track list to fix titles or artists before syncing</li>
             <li>Names the playlist after the video title automatically</li>
             <li>Creates a new Spotify playlist and opens it directly in Spotify on success</li>
             <li>Connects securely to a user's Spotify account via OAuth 2.0</li>
@@ -58,8 +58,8 @@ export default function AudioLens() {
         <section>
           <h2 className={styles.sectionHeading}>Key decisions</h2>
           <ul className={styles.bodyList}>
-            <li><strong>YouTube description as the primary source:</strong> Most DJ mixes and curated videos already include timestamped tracklists in the description — parsing this directly is faster and more accurate than OCR.</li>
-            <li><strong>OCR as a fallback, not the primary flow:</strong> v1 was entirely OCR-based. v2 flips the model — YouTube parsing is the happy path, OCR handles edge cases like pinned comments or external screenshots.</li>
+            <li><strong>YouTube description as the primary source:</strong> Most DJ mixes and curated videos already include timestamped tracklists in the description. Parsing this directly is faster and more accurate than OCR.</li>
+            <li><strong>OCR as a fallback, not the primary flow:</strong> The earlier version was entirely OCR-based. The new model makes YouTube parsing the happy path, with OCR handling edge cases like pinned comments or external screenshots.</li>
             <li><strong>Editable track list before syncing:</strong> A review step lets users correct parsing errors before the playlist is created, improving accuracy without requiring perfect parsing.</li>
             <li><strong>Offscreen document for Tesseract:</strong> Running OCR in an offscreen document keeps the popup responsive and avoids Manifest V3 service worker limitations.</li>
           </ul>
@@ -68,10 +68,10 @@ export default function AudioLens() {
         <section>
           <h2 className={styles.sectionHeading}>Challenges &amp; learnings</h2>
           <p className={styles.bodyText}>
-            Parsing timestamped tracklists from video descriptions required handling a wide range of formats — some videos use "00:00 Artist - Title", others flip the order, and some omit artists entirely. Building a parser robust enough to handle these variations without false positives was the core engineering challenge.
+            Parsing timestamped tracklists from video descriptions required handling a wide range of formats. Some videos use "00:00 Artist - Title", others flip the order, and some omit artists entirely. Building a parser robust enough to handle these variations without false positives was the core engineering challenge.
           </p>
           <p className={styles.bodyText}>
-            Manifest V3's restrictions on background scripts also added complexity — moving OCR to an offscreen document was a key architectural decision to keep Tesseract.js (WebAssembly-based) working within the new extension model.
+            Manifest V3's restrictions on background scripts also added complexity. Moving OCR to an offscreen document was a key architectural decision to keep Tesseract.js (WebAssembly-based) working within the new extension model.
           </p>
         </section>
 

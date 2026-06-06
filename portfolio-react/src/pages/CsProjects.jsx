@@ -8,7 +8,7 @@ const projects = [
     image: '/eileenhwang/pages/assets/img/audiolens.png',
     link: '/projects/audiolens',
     description:
-      'A Chrome extension (v2) that detects timestamped tracklists from YouTube video descriptions and converts them into Spotify playlists in one click. Falls back to screenshot OCR for tracklists found in comments or images.',
+      'A Chrome extension that detects timestamped tracklists from YouTube video descriptions and converts them into Spotify playlists in one click. Falls back to screenshot OCR for tracklists found in comments or images.',
     tags: ['Chrome Extension', 'Spotify API', 'OCR', 'JavaScript'],
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     image: '/eileenhwang/pages/assets/img/SmartTodo.png',
     link: '/projects/smarttodo',
     description:
-      'A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category. Features include dark mode, category management, progress tracking, and deadline-based filtering. Contributed as the sole developer and designer.',
+      'A cross-platform to-do list app built with Electron that prioritizes tasks based on deadlines, urgency, and category. Features include dark mode, category management, progress tracking, and deadline-based filtering.',
     tags: ['UI/UX Design', 'Desktop App Development', 'Electron', 'Product Design'],
   },
 ];

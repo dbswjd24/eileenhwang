@@ -34,7 +34,7 @@ export default function FilmedHere() {
           </p>
           <p className={styles.bodyText}>
             The "Filmed near me" feature uses your geolocation to surface filming locations within
-            10 km of wherever you are — so you can discover that your neighborhood was in a movie
+            10 km of wherever you are, so you can discover that your neighborhood was in a movie
             you've seen a dozen times.
           </p>
         </section>
