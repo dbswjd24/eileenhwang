@@ -9,6 +9,7 @@ export default function AudioLens() {
         <Link to="/projects/cs" className={styles.backButton}>← Back to CS Projects</Link>
 
         <div className={styles.header}>
+          <div className={styles.iconTitle}>🎵📸</div>
           <h1 className={styles.title}>AudioLens</h1>
           <p className={styles.projectDescriptionShort}>
             A Chrome extension (v2) that detects tracklists from YouTube videos and turns them into Spotify playlists in one click — with screenshot OCR as a fallback.

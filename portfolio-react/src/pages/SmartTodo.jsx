@@ -9,6 +9,7 @@ export default function SmartTodo() {
         <Link to="/projects/cs" className={styles.backButton}>← Back to CS Projects</Link>
 
         <div className={styles.header}>
+          <div className={styles.iconTitle}>✅📋</div>
           <h1 className={styles.title}>SmartTodo</h1>
           <p className={styles.projectDescriptionShort}>
             A cross-platform desktop to-do list application that intelligently prioritizes tasks based on deadlines, urgency, and user-defined categories.
