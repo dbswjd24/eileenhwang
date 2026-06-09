@@ -7,6 +7,7 @@ const projects = [
     title: 'AudioLens',
     image: '/eileenhwang/pages/assets/img/audiolens.png',
     link: '/projects/audiolens',
+    contain: true,
     description:
       'A Chrome extension that detects timestamped tracklists from YouTube video descriptions and converts them into Spotify playlists in one click. Falls back to screenshot OCR for tracklists found in comments or images.',
     tags: ['Chrome Extension', 'Spotify API', 'OCR', 'JavaScript'],
