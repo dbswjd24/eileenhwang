@@ -14,6 +14,14 @@ export default function AudioLens() {
           <p className={styles.projectDescriptionShort}>
             A Chrome extension that detects tracklists from YouTube videos and turns them into Spotify playlists in one click, with screenshot OCR and paste-text as fallbacks, and support for both English and Korean music apps.
           </p>
+          <a
+            href="https://github.com/dbswjd24/audiolens"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.githubLink}
+          >
+            View GitHub Repository
+          </a>
         </div>
 
         <video className={styles.demoVideo} controls preload="metadata">
