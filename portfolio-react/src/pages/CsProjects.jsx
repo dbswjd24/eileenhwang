@@ -15,10 +15,9 @@ const projects = [
     title: 'Filmed Here',
     image: '/eileenhwang/pages/assets/img/filmedhere.png',
     link: '/projects/filmedhere',
-    contain: true,
     description:
-      'A web app that lets users discover filming locations from their favorite movies and TV shows. Browse iconic scenes, explore locations on an interactive map, and plan visits to the real-world spots behind the screen.',
-    tags: ['Web Development', 'Maps API', 'React', 'Full Stack'],
+      'A web app that lets you discover the real filming locations behind your favorite movies and TV shows. Click any pin to see the movie poster, cast, rating, and the exact scene shot there.',
+    tags: ['Next.js', 'Mapbox GL', 'TMDB API', 'TypeScript'],
   },
   {
     title: 'SmartTodo',

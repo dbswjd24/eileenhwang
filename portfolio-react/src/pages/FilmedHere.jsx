@@ -12,65 +12,66 @@ export default function FilmedHere() {
           <div className={styles.iconTitle}>🎬🗺️</div>
           <h1 className={styles.title}>Filmed Here</h1>
           <a
-            href="#"
+            href="https://filmed-here.vercel.app"
+            target="_blank"
+            rel="noreferrer"
             className={styles.githubLink}
           >
             View Website
           </a>
           <p className={styles.introText}>
             An interactive map app that lets you discover the real-world filming locations behind
-            your favorite movies and TV shows. Search any title to auto-load verified spots from
-            Wikidata, or use "Filmed near me" to find locations within 10 km of wherever you are.
+            your favorite movies and TV shows. Click any pin to see the movie poster, cast,
+            rating, and the exact scene that was shot there.
           </p>
         </div>
 
         <section>
           <h2 className={styles.sectionHeading}>What it does</h2>
           <p className={styles.bodyText}>
-            Filmed Here bridges the gap between watching a film and experiencing its world. Search
-            any movie or TV title and the app automatically pulls verified filming locations from
-            Wikidata and pins them on an interactive Mapbox map. If Wikidata doesn't have
-            coordinates, you can drop a pin manually with a custom label.
+            Filmed Here bridges the gap between watching a film and experiencing its world. Browse
+            34 hand-curated filming locations from iconic movies and TV shows — from Full House's
+            Painted Ladies in San Francisco to Harry Potter's Alnwick Castle in England to Game of
+            Thrones' Dark Hedges in Northern Ireland.
           </p>
           <p className={styles.bodyText}>
-            The "Filmed near me" feature uses your geolocation to surface filming locations within
-            10 km of wherever you are, so you can discover that your neighborhood was in a movie
-            you've seen a dozen times.
+            Click any pin on the map or in the sidebar to open a detail panel with the TMDB
+            backdrop image, title, year, star rating, plot overview, genre tags, and a poster
+            strip — plus a description of the exact scene filmed at that location.
           </p>
         </section>
 
         <div className={styles.featureSection}>
           <div className={styles.featureItem}>
-            <span className={styles.featureTitle}>Title Search: </span>
-            Search any movie or TV show to auto-load its filming locations onto the map via Wikidata.
+            <span className={styles.featureTitle}>Movie Info Panel: </span>
+            Each pin loads the TMDB poster, backdrop, cast photo, rating, and plot overview directly from The Movie Database API.
+          </div>
+          <div className={styles.featureItem}>
+            <span className={styles.featureTitle}>Scene Descriptions: </span>
+            Every location includes a description of the exact scene or sequence filmed there, not just a generic address.
           </div>
           <div className={styles.featureItem}>
             <span className={styles.featureTitle}>Filmed Near Me: </span>
-            Geolocates the user and fetches filming spots within 10 km using a SPARQL geospatial query.
+            Geolocates you and filters the map to filming locations within 100 km, so you can discover that your city was in a movie.
           </div>
           <div className={styles.featureItem}>
-            <span className={styles.featureTitle}>Manual Pin Mode: </span>
-            When Wikidata has no results, click the map to drop a pin with a custom location label.
-          </div>
-          <div className={styles.featureItem}>
-            <span className={styles.featureTitle}>Save &amp; Explore: </span>
-            Bookmark favorite locations with a ⭐, view details in a right-side panel, and persist all pins to localStorage.
+            <span className={styles.featureTitle}>Search & Save: </span>
+            Search by title, location, or city. Bookmark favorite spots with ⭐ — saved pins persist via localStorage.
           </div>
         </div>
 
         <section>
           <h2 className={styles.sectionHeading}>Technical overview</h2>
           <p className={styles.bodyText}>
-            When a user searches a title, the app hits the TMDB API to resolve the show or movie
-            and get metadata. It then queries the Wikidata SPARQL endpoint using the filming
-            location property (P915) to retrieve geotagged places associated with that title.
-            Results are mapped to lat/lng coordinates and rendered as Mapbox pins.
+            The app is built with Next.js (App Router) and TypeScript, with Mapbox GL JS rendering
+            the interactive map client-side via a dynamic import with SSR disabled. The 34 curated
+            filming locations are stored as a typed static dataset — each with coordinates, scene
+            description, and a TMDB search title used to fetch live movie data at display time.
           </p>
           <p className={styles.bodyText}>
-            For the "near me" flow, a geospatial SPARQL query uses Wikidata's{' '}
-            <code>wikibase:around</code> service to find any filming location within a configurable
-            radius. All API calls are routed through Next.js API routes to keep keys server-side
-            and handle timeouts cleanly.
+            When a pin is clicked, the SidePanel makes two parallel client-side fetch calls to the
+            TMDB API: one to resolve the title to a TMDB ID, and one to fetch full details and
+            images. Tailwind CSS v4 handles styling with no extra config.
           </p>
         </section>
 
@@ -80,20 +81,20 @@ export default function FilmedHere() {
 
         <div className={styles.featureSection}>
           <div className={styles.featureItem}>
-            <span className={styles.featureTitle}>Wikidata over a custom database: </span>
-            Wikidata's P915 (filming location) property gives structured, community-maintained geodata without needing to build or maintain a backend database.
+            <span className={styles.featureTitle}>Curated dataset over live scraping: </span>
+            After experimenting with Wikidata SPARQL queries, I found the data quality too inconsistent for a good UX. A hand-verified dataset of 34 locations across 6 continents gave reliable, accurate results.
           </div>
           <div className={styles.featureItem}>
-            <span className={styles.featureTitle}>TMDB for search: </span>
-            TMDB's search API handles fuzzy title matching and disambiguates between movies and TV shows, so users don't have to be exact.
+            <span className={styles.featureTitle}>Client-side TMDB fetch: </span>
+            TMDB's API supports browser CORS, so fetching poster/backdrop data directly from the client avoids a server round-trip and keeps the architecture simple.
           </div>
           <div className={styles.featureItem}>
-            <span className={styles.featureTitle}>Manual fallback for missing locations: </span>
-            Rather than showing an error when Wikidata has no data, the app falls back to a map-click flow so users can still contribute a pin themselves.
+            <span className={styles.featureTitle}>Scene descriptions in the data layer: </span>
+            Rather than relying on an API to tell the user what scene was filmed where, I authored a specific scene description for every location so the content is always accurate and informative.
           </div>
           <div className={styles.featureItem}>
             <span className={styles.featureTitle}>LocalStorage for persistence: </span>
-            Keeping pins client-side keeps the app stateless and avoids auth complexity, which was the right tradeoff for this scope.
+            Keeping saved pins client-side avoids auth complexity and keeps the app fully stateless — the right tradeoff for this scope.
           </div>
         </div>
 
@@ -104,9 +105,9 @@ export default function FilmedHere() {
             <span className={styles.techTag}>TypeScript</span>
             <span className={styles.techTag}>Mapbox GL</span>
             <span className={styles.techTag}>TMDB API</span>
-            <span className={styles.techTag}>Wikidata SPARQL</span>
             <span className={styles.techTag}>Tailwind CSS</span>
             <span className={styles.techTag}>React</span>
+            <span className={styles.techTag}>Vercel</span>
           </div>
         </section>
       </div>
