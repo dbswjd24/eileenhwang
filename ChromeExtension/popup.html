@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Audiolens</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --card: #181818;
+      --surface2: #242424;
+      --green: #1DB954;
+      --text: #fff;
+      --text-muted: #b3b3b3;
+      --border: #282828;
+      --red: #e55;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 420px;
+      min-height: 500px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .logo-icon svg { width: 28px; height: 28px; }
+    .logo-text { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    .logo-text span { color: var(--green); }
+
+    /* ── Status bar ── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #555;
+      flex-shrink: 0;
+    }
+    .status-dot.pulse { background: var(--green); animation: pulse 1.2s infinite; }
+    .status-dot.green { background: var(--green); }
+    .status-dot.red   { background: var(--red); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* ── Screens ── */
+    .screen { display: none; flex-direction: column; flex: 1; padding: 20px; }
+    .screen.active { display: flex; }
+
+    /* ── Idle / No-tracks shared layout ── */
+    .idle-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 18px 0 8px;
+      gap: 6px;
+    }
+    .idle-hero .hero-icon { font-size: 36px; }
+    .idle-hero h2 { font-size: 16px; font-weight: 600; }
+    .idle-hero p  { font-size: 12px; color: var(--text-muted); line-height: 1.5; max-width: 280px; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1;
+      height: 1px; background: var(--border);
+    }
+
+    /* ── Upload zone ── */
+    .upload-zone {
+      border: 1.5px dashed var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color: var(--green);
+      background: rgba(29,185,84,.06);
+    }
+    .upload-zone.has-file { border-color: var(--green); border-style: solid; }
+    .upload-zone-icon { font-size: 28px; margin-bottom: 6px; }
+    .upload-zone-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .upload-zone-sub   { font-size: 11px; color: var(--text-muted); }
+
+    /* ── Paste zone ── */
+    .paste-textarea {
+      width: 100%;
+      min-height: 80px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 12px;
+      padding: 10px 12px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .paste-textarea:focus { outline: none; border-color: var(--green); }
+    .paste-textarea::placeholder { color: var(--text-muted); }
+
+    /* ── Buttons ── */
+    .btn {
+      border: none; border-radius: 50px;
+      font-weight: 700; cursor: pointer;
+      padding: 12px 20px; font-size: 13px;
+      transition: filter .15s;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .btn:hover:not(:disabled) { filter: brightness(1.1); }
+    .btn:disabled { background: var(--surface2) !important; color: var(--text-muted) !important; cursor: not-allowed; border: 1px solid var(--border) !important; }
+    .btn-primary { background: var(--green); color: #000; }
+    .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+    /* ── Scanning ── */
+    #screen-scanning { justify-content: center; align-items: center; gap: 12px; }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── OCR progress ── */
+    #screen-ocr { justify-content: center; align-items: center; gap: 12px; }
+    .ocr-title { font-size: 15px; font-weight: 600; }
+    .ocr-sub   { font-size: 12px; color: var(--text-muted); }
+    .progress-bar-wrap {
+      width: 100%; background: var(--surface2);
+      border-radius: 4px; height: 4px; overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%; background: var(--green);
+      border-radius: 4px; width: 0%;
+      transition: width .3s;
+    }
+
+    /* ── Tracks screen ── */
+    .tracks-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .track-count-badge {
+      background: var(--green);
+      color: #000;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .source-label { font-size: 11px; color: var(--text-muted); }
+    .video-pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      font-size: 11px; color: var(--text-muted);
+    }
+    .video-pill svg { flex-shrink: 0; }
+    .video-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+
+    .track-list {
+      flex: 1; overflow-y: auto;
+      max-height: 240px;
+      display: flex; flex-direction: column; gap: 4px;
+      margin-bottom: 12px;
+    }
+    .track-row {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 8px;
+    }
+    .track-num {
+      font-size: 10px; color: var(--text-muted);
+      width: 18px; flex-shrink: 0; text-align: right;
+    }
+    .track-inputs { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .track-inputs input {
+      background: transparent; border: none;
+      color: var(--text); font-size: 12px;
+      padding: 1px 0; width: 100%;
+    }
+    .track-inputs input:focus { outline: none; border-bottom: 1px solid var(--green); }
+    .t-artist { color: var(--text-muted) !important; font-size: 11px !important; }
+    .swap-btn, .remove-btn {
+      background: none; border: none;
+      color: var(--text-muted); cursor: pointer;
+      font-size: 14px; padding: 0 2px;
+      flex-shrink: 0;
+    }
+    .swap-btn:hover   { color: var(--green); }
+    .remove-btn:hover { color: var(--red); }
+
+    .playlist-name-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 4px; }
+    .playlist-name-row label { font-size: 11px; color: var(--text-muted); }
+    .playlist-name-input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 13px;
+      padding: 8px 12px;
+      width: 100%;
+    }
+    .playlist-name-input:focus { outline: none; border-color: var(--green); }
+
+    /* ── Playlist picker ── */
+    .picker-header { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .picker-sub    { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+    .playlist-picker-list {
+      flex: 1; overflow-y: auto;
+      max-height: 300px;
+      display: flex; flex-direction: column; gap: 4px;
+      margin-bottom: 12px;
+    }
+    .pl-row, .pl-new-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: background .15s, border-color .15s;
+    }
+    .pl-row:hover, .pl-new-row:hover { background: var(--surface2); }
+    .pl-row.selected, .pl-new-row.selected {
+      background: rgba(29,185,84,.1);
+      border-color: var(--green);
+    }
+    .pl-thumb {
+      width: 40px; height: 40px;
+      border-radius: 4px; object-fit: cover; flex-shrink: 0;
+    }
+    .pl-thumb-placeholder {
+      width: 40px; height: 40px;
+      border-radius: 4px; background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .pl-new-icon {
+      width: 40px; height: 40px;
+      border-radius: 4px;
+      background: rgba(29,185,84,.15);
+      color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 300; flex-shrink: 0;
+    }
+    .pl-info { flex: 1; min-width: 0; }
+    .pl-name  { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pl-count { font-size: 11px; color: var(--text-muted); }
+    .pl-check { font-size: 14px; color: var(--green); opacity: 0; transition: opacity .15s; }
+    .pl-row.selected .pl-check, .pl-new-row.selected .pl-check { opacity: 1; }
+    .new-name-input {
+      background: transparent; border: none;
+      color: var(--text); font-size: 13px;
+      flex: 1; min-width: 0;
+    }
+    .new-name-input:focus { outline: none; }
+
+    /* ── Syncing ── */
+    #screen-syncing { justify-content: center; align-items: center; gap: 10px; }
+    .sync-title { font-size: 15px; font-weight: 600; }
+    .sync-sub   { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Success ── */
+    #screen-success { justify-content: center; align-items: center; text-align: center; gap: 10px; }
+    .success-emoji { font-size: 48px; }
+    .success-title { font-size: 18px; font-weight: 700; }
+    .success-sub   { font-size: 13px; color: var(--text-muted); }
+    .playlist-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #000;
+      font-weight: 700; font-size: 14px;
+      padding: 12px 24px; border-radius: 50px;
+      text-decoration: none; margin-top: 6px;
+    }
+    .start-over { font-size: 12px; color: var(--text-muted); text-decoration: underline; cursor: pointer; margin-top: 4px; background: none; border: none; }
+
+    /* ── Error ── */
+    #screen-error { justify-content: center; align-items: center; text-align: center; gap: 10px; }
+    .error-emoji { font-size: 40px; }
+    .error-msg   { font-size: 13px; color: var(--text-muted); max-width: 320px; white-space: pre-wrap; line-height: 1.5; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="11" stroke="#1DB954" stroke-width="2"/>
+        <path d="M7 15.5c2.5-1.5 5.5-2 9-1" stroke="#1DB954" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M6.5 12c3-1.8 6.5-2.3 10.5-1" stroke="#1DB954" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M6 8.5c3.5-2 7.5-2.5 12-1" stroke="#1DB954" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-text">Audio<span>lens</span></div>
+  </div>
+
+  <!-- Status bar -->
+  <div class="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Loading...</span>
+  </div>
+
+  <!-- ── Screen: idle ── -->
+  <div class="screen" id="screen-idle">
+    <div class="idle-hero">
+      <div class="hero-icon">▶</div>
+      <h2>Open a YouTube video</h2>
+      <p>Navigate to a YouTube video with a timestamped tracklist in its description, then reopen this extension.</p>
+    </div>
+
+    <div class="divider">or use a screenshot</div>
+
+    <div class="upload-zone" id="idle-upload-zone">
+      <input type="file" id="idle-file-input" accept="image/*" style="display:none">
+      <div class="upload-zone-icon">📷</div>
+      <div class="upload-zone-title">Upload tracklist screenshot</div>
+      <div class="upload-zone-sub">PNG, JPG — from comments or anywhere</div>
+    </div>
+    <button class="btn btn-primary" id="idle-ocr-btn" disabled>Scan Screenshot</button>
+
+    <div class="divider">or paste text</div>
+
+    <textarea class="paste-textarea" id="idle-paste-text" placeholder="Paste a tracklist here — timestamps (0:00), numbered (1.) or plain lines work"></textarea>
+    <button class="btn btn-primary" id="idle-paste-btn" disabled style="background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)">Parse Tracklist</button>
+  </div>
+
+  <!-- ── Screen: scanning ── -->
+  <div class="screen" id="screen-scanning">
+    <div class="spinner"></div>
+    <div style="font-size:14px;color:var(--text-muted)">Scanning YouTube description…</div>
+  </div>
+
+  <!-- ── Screen: no-tracks ── -->
+  <div class="screen" id="screen-no-tracks">
+    <div class="idle-hero">
+      <div class="hero-icon">🔍</div>
+      <h2>No tracklist found</h2>
+      <p>No timestamped tracklist was found in the video description. Try a screenshot or paste the tracklist below.</p>
+    </div>
+
+    <div class="divider">use a screenshot</div>
+
+    <div class="upload-zone" id="notracks-upload-zone">
+      <input type="file" id="notracks-file-input" accept="image/*" style="display:none">
+      <div class="upload-zone-icon">📷</div>
+      <div class="upload-zone-title">Upload tracklist screenshot</div>
+      <div class="upload-zone-sub">PNG, JPG — from comments or anywhere</div>
+    </div>
+    <button class="btn btn-primary" id="notracks-ocr-btn" disabled>Scan Screenshot</button>
+
+    <div class="divider">or paste text</div>
+
+    <textarea class="paste-textarea" id="notracks-paste-text" placeholder="Paste a tracklist here — timestamps (0:00), numbered (1.) or plain lines work"></textarea>
+    <button class="btn btn-primary" id="notracks-paste-btn" disabled style="background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)">Parse Tracklist</button>
+  </div>
+
+  <!-- ── Screen: OCR progress ── -->
+  <div class="screen" id="screen-ocr">
+    <div class="spinner"></div>
+    <div class="ocr-title">Running OCR…</div>
+    <div class="ocr-sub" id="ocr-status-sub">Loading OCR engine (~10s first run)…</div>
+    <div class="progress-bar-wrap" style="width:100%">
+      <div class="progress-bar" id="ocr-progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- ── Screen: tracks ── -->
+  <div class="screen" id="screen-tracks">
+    <div class="tracks-meta">
+      <span class="track-count-badge"><span id="track-count">0</span> tracks</span>
+      <span class="source-label" id="source-label"></span>
+    </div>
+
+    <div class="video-pill" id="video-pill" style="display:none">
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
+        <rect width="14" height="10" rx="2" fill="#FF0000"/>
+        <path d="M5.5 3L9.5 5L5.5 7V3Z" fill="white"/>
+      </svg>
+      <span class="video-title" id="video-pill-title"></span>
+    </div>
+
+    <div class="track-list" id="track-list"></div>
+
+    <div class="playlist-name-row">
+      <label>Playlist name</label>
+      <input class="playlist-name-input" id="playlist-name" type="text" placeholder="Audiolens Import" maxlength="100">
+    </div>
+
+    <button class="btn btn-primary" id="sync-btn">Add to Spotify</button>
+  </div>
+
+  <!-- ── Screen: playlist picker ── -->
+  <div class="screen" id="screen-playlist">
+    <div class="picker-header">Add <span id="picker-track-count">0 tracks</span> to…</div>
+    <div class="picker-sub">Choose an existing playlist or create a new one.</div>
+    <div class="playlist-picker-list" id="playlist-picker-list"></div>
+    <button class="btn btn-primary" id="confirm-sync-btn" disabled>Confirm</button>
+  </div>
+
+  <!-- ── Screen: syncing ── -->
+  <div class="screen" id="screen-syncing">
+    <div class="spinner"></div>
+    <div class="sync-title" id="sync-status-title">Syncing…</div>
+    <div class="sync-sub"   id="sync-status-sub"></div>
+  </div>
+
+  <!-- ── Screen: success ── -->
+  <div class="screen" id="screen-success">
+    <div class="success-emoji">🎉</div>
+    <div class="success-title" id="success-title">Playlist created!</div>
+    <div class="success-sub"   id="success-sub"></div>
+    <a class="playlist-link" id="playlist-link" href="#" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="11" stroke="#000" stroke-width="2"/>
+        <path d="M7 15.5c2.5-1.5 5.5-2 9-1" stroke="#000" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M6.5 12c3-1.8 6.5-2.3 10.5-1" stroke="#000" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M6 8.5c3.5-2 7.5-2.5 12-1" stroke="#000" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      Open in Spotify
+    </a>
+    <button class="start-over" id="retry-btn">Start over</button>
+  </div>
+
+  <!-- ── Screen: error ── -->
+  <div class="screen" id="screen-error">
+    <div class="error-emoji">⚠️</div>
+    <div style="font-size:15px;font-weight:600">Something went wrong</div>
+    <div class="error-msg" id="error-msg"></div>
+    <button class="btn btn-secondary" id="error-retry-btn" style="margin-top:12px">Try again</button>
+  </div>
+
+  <script src="tesseract/tesseract.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
