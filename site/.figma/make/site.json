@@ -1,0 +1,11 @@
+{
+  "title": "Eileen Hwang \u2014 Product, Design & Engineering",
+  "description": "Portfolio of Yoonjung (Eileen) Hwang: product management, UI/UX design, and front-end engineering work.",
+  "robots": {
+    "index": true
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
