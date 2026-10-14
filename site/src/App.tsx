@@ -841,7 +841,7 @@ export default function App() {
           <p>
             I build products from 0 to 1, and then from 1 to infinity, making engagement easier
             and processes simpler. With a multidisciplinary background spanning computer science,
-            statistics, psychology, and design, I build intuitive,
+            statistics, psychology, and design, I design intuitive,
             responsive, and visually considered applications, from the first user interview to
             a multi-million-dollar product.
           </p>
