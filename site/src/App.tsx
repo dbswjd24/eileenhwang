@@ -909,20 +909,14 @@ export default function App() {
           </p>
         </div>
         <div className="experience-list">
-          {experience.map((item, index) => (
+          {experience.map((item) => (
             <article className="experience-row" key={item.company}>
-              <div className="experience-index">{String(index + 1).padStart(2, "0")}</div>
               <div className="experience-company">
                 <h3>{item.company}</h3>
                 <span>{item.role}</span>
-              </div>
-              <div className="experience-detail">
                 <span className="experience-period">{item.period}</span>
-                <ul className="experience-bullets">{item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-                <div className="experience-highlights">
-                  {item.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
-                </div>
               </div>
+              <ul className="experience-bullets">{item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
             </article>
           ))}
         </div>
