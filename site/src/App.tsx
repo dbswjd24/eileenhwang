@@ -840,8 +840,8 @@ export default function App() {
           <h2><Scramble text="Hello, I’m Eileen." className="scramble-wrap" playOnView /></h2>
           <p>
             I build products from 0 to 1, and then from 1 to infinity, making engagement easier
-            and processes simpler. With a
-            background in cognitive science, data science, and design, I build intuitive,
+            and processes simpler. With a multidisciplinary background spanning computer science,
+            statistics, psychology, and design, I build intuitive,
             responsive, and visually considered applications, from the first user interview to
             the shipped interface.
           </p>
