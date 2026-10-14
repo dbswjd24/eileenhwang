@@ -843,7 +843,7 @@ export default function App() {
             and processes simpler. With a multidisciplinary background spanning computer science,
             statistics, psychology, and design, I build intuitive,
             responsive, and visually considered applications, from the first user interview to
-            the shipped interface.
+            a multi-million-dollar product.
           </p>
           <p>
             Working across product, design, and engineering teams sparked my interest in bridging
