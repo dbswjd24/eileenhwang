@@ -904,7 +904,7 @@ export default function App() {
             <article className="experience-row" key={item.company}>
               <div className="experience-company">
                 <h3>{item.company}</h3>
-                <span>{item.role}</span>
+                {item.role.split(" · ").map((part) => <span key={part}>{part}</span>)}
                 <span className="experience-period">{item.period}</span>
               </div>
               <ul className="experience-bullets">{item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>

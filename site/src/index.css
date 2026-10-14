@@ -1530,3 +1530,25 @@ body {
   .solution-map { flex-wrap: wrap; }
   .solution-insight { white-space: normal; }
 }
+
+/* Experience: balanced columns, bullets use the full width */
+.experience-row {
+  gap: 56px;
+  grid-template-columns: 280px 1fr;
+}
+
+.experience-company {
+  gap: 6px;
+}
+
+.experience-company .experience-period {
+  margin-top: 6px;
+}
+
+.experience-row .experience-bullets {
+  max-width: none;
+}
+
+@media (max-width: 800px) {
+  .experience-row { gap: 16px; grid-template-columns: 1fr; }
+}
