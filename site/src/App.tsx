@@ -19,7 +19,7 @@ type Sprint = {
   insightsLabel?: string;
   solutions: { insight: string; solution: string; detail: string; image?: string }[];
   solutionsLabel?: string;
-  reflection: string;
+  reflection?: string;
   reflectionLabel?: string;
 };
 
@@ -200,8 +200,6 @@ const projects: Project[] = [
           detail: "Geolocation filters the map to filming spots within 100 km, plus search and saved favorites.",
         },
       ],
-      reflection:
-        "Hand-picking 34 locations felt slow at first. It ended up being the reason the app is worth using, because every pin is actually correct.",
     },
   },  {
     id: "clearcollab",
@@ -254,8 +252,6 @@ const projects: Project[] = [
           image: "sol4.png",
         },
       ],
-      reflection:
-        "Students wanted less attention and teachers wanted more control, so at first it felt like two separate problems. Treating it as one shared problem is what made the features click. I’d love to test whether grouped questions change how teachers pace a lesson.",
     },
   },
   {
@@ -305,8 +301,6 @@ const projects: Project[] = [
           image: "food4.png",
         },
       ],
-      reflection:
-        "We went back and forth on adding nudges at checkout and dropped the idea. Nobody wants a lecture while ordering dinner. With more time, I’d want to know whether the recap actually changes what people order next.",
     },
   },
   {
@@ -356,8 +350,6 @@ const projects: Project[] = [
           image: "womp8.png",
         },
       ],
-      reflection:
-        "Our three personas wanted almost opposite things, and the guided/pro toggle was our answer to that. Community sharing is the next thing I’d explore, so beginners can learn from what advanced users make.",
     },
   },
   {
@@ -411,8 +403,6 @@ const projects: Project[] = [
           image: "design4.png",
         },
       ],
-      reflection:
-        "With one weekend, we had to pick a single flow and make it work: plan, pick stops, confirm. Thinking through monetization early also gave us better answers when the judges asked how it would make money.",
     },
   },  {
     id: "smarttodo",
@@ -459,8 +449,6 @@ const projects: Project[] = [
           detail: "Data stays on the device and works offline, and Electron makes it cross-platform without a backend.",
         },
       ],
-      reflection:
-        "My first version had a settings page for everything. Cutting most of it made the app easier to use.",
     },
   },
 ];
@@ -705,12 +693,14 @@ function SprintStory({ sprint, name }: { sprint: Sprint; name: string }) {
         </div>
       </section>
 
-      <section className="sprint-step">
-        <div className="step-label"><b>05</b>{sprint.reflectionLabel ?? "Reflection"}</div>
-        <div className="step-body">
-          <p className="reflection">{sprint.reflection}</p>
-        </div>
-      </section>
+      {sprint.reflection && (
+        <section className="sprint-step">
+          <div className="step-label"><b>05</b>{sprint.reflectionLabel ?? "Reflection"}</div>
+          <div className="step-body">
+            <p className="reflection">{sprint.reflection}</p>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
