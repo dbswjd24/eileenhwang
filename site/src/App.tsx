@@ -45,7 +45,7 @@ const projects: Project[] = [
     title: "Unetic, one home for every campus club",
     category: "Product & design",
     year: "2024 · Acquired",
-    role: "Co-founder · Product & front-end",
+    role: "Co-founder · Product & full-stack",
     summary:
       "A campus platform I co-founded that centralizes verified club information, so Berkeley students can discover, join, and engage with clubs without the friction. It grew to 3,000+ active students and was acquired by Sideshift.",
     stats: [
@@ -56,7 +56,7 @@ const projects: Project[] = [
     cover: "unetic.png",
     tone: "blue",
     link: { label: "Visit unetic.org", href: "https://unetic.org" },
-    tags: ["Product management", "User research", "UI/UX", "Front-end"],
+    tags: ["Product management", "User research", "UI/UX", "Full-stack"],
     sprint: {
       event: "Co-founder · Feb – Dec 2024 · Acquired by Sideshift",
       hmw: "How might we help students find the right campus club, and trust what they find, without digging through scattered sources?",
@@ -828,7 +828,7 @@ export default function App() {
         <div className="principle-strip" aria-label="Disciplines">
           <span>Product management</span>
           <span>UI/UX design</span>
-          <span>Front-end engineering</span>
+          <span>Full-stack engineering</span>
           <span>Cross-functional delivery</span>
         </div>
       </section>
