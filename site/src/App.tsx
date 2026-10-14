@@ -33,6 +33,7 @@ type Project = {
   cover: string;
   tone: "blue" | "coral" | "acid" | "lilac" | "ink";
   link?: { label: string; href: string };
+  storeLink?: { label: string; href?: string };
   tags: string[];
   sprint: Sprint;
 };
@@ -58,9 +59,13 @@ const projects: Project[] = [
         "Club information lived across flyers, group chats, and outdated pages. Students struggled to find organizations that matched their interests, and club leaders had no single place to recruit, manage members, and communicate. Because anyone could post anything, trust was part of the problem too.",
       research: {
         method:
-          "I ran surveys and user testing sessions with university students to understand how they discover and join clubs, then iterated on multiple prototypes using their feedback.",
+          "As a Golden Bear Orientation (GBO) leader, I surveyed incoming freshmen and transfer students at Berkeley about how they find and join clubs. I followed up with user testing sessions and iterated on multiple prototypes using their feedback.",
+        stats: [
+          { value: "80%", label: "of freshmen and transfers didn’t know what to look for, because club resources were scattered everywhere" },
+        ],
       },
       insights: [
+        "New students had no single place to start, so most of them didn’t know what to look for.",
         "Students looked for clubs by interest, workload, and fit. Long lists of club names overwhelmed them.",
         "Club operations (recruiting, membership, communication) were split across too many tools for leaders to keep up.",
         "Verification mattered: students needed confidence that clubs and members were real before engaging.",
@@ -80,7 +85,7 @@ const projects: Project[] = [
         {
           insight: "Students need to trust what they see",
           solution: "Student membership verification",
-          detail: "Only verified university students can access and manage club information, keeping the community secure and trustworthy.",
+          detail: "Only verified Berkeley students can access and manage club information, keeping the community secure and trustworthy.",
         },
       ],
       reflection:
@@ -93,24 +98,25 @@ const projects: Project[] = [
     year: "2026",
     role: "Solo builder",
     summary:
-      "A Chrome extension that detects timestamped tracklists in YouTube videos and turns them into Spotify playlists, with screenshot OCR and paste-text fallbacks.",
+      "A Chrome extension that detects timestamped tracklists in YouTube videos and turns them into Spotify playlists. If there’s no tracklist in the description, you can paste one in.",
     stat: { value: "EN + KR", label: "tracklist formats supported" },
     cover: "audiolens.png",
     tone: "acid",
     link: { label: "View on GitHub", href: "https://github.com/dbswjd24/audiolens" },
-    tags: ["Chrome extension", "Spotify API", "OCR", "JavaScript"],
+    storeLink: { label: "Chrome Web Store" },
+    tags: ["Chrome extension", "Spotify API", "OAuth", "JavaScript"],
     sprint: {
       event: "Personal project · Chrome extension",
       hmw: "How might we turn a tracklist buried in a YouTube video into a Spotify playlist, without searching for every song by hand?",
       context:
-        "YouTube is one of the biggest places people discover music. DJ sets and curated mixes often list every song in the description, but saving them to Spotify means searching for each track one by one. When the tracklist lives in a screenshot or a comment, it’s even harder.",
+        "YouTube is one of the biggest places people discover music. DJ sets and curated mixes often list every song in the description, but saving them to Spotify means searching for each track one by one. When the tracklist lives in a comment or on a blog, it’s even harder.",
       research: {
         label: "Explore",
         method:
-          "I mapped where tracklists actually live: timestamped YouTube descriptions, pinned comments, blog posts, and screenshots from Korean music apps like Melon, Genie, Bugs, and Flo.",
+          "I mapped where tracklists actually live: timestamped YouTube descriptions, pinned comments, blog posts, and lists copied from Korean music apps like Melon, Genie, Bugs, and Flo.",
       },
       insights: [
-        "Parsing the video description directly is faster and more accurate than OCR, so it should be the first path.",
+        "Reading the video description directly is the fastest and most accurate path, so it should come first.",
         "Tracklists come in at least three formats, and Korean music apps put title and artist on separate lines with no separator.",
         "Artist and title order is often ambiguous, so the parser will never be perfect and users need an easy way to fix it.",
       ],
@@ -119,8 +125,8 @@ const projects: Project[] = [
       solutions: [
         {
           insight: "Descriptions are the most reliable source",
-          solution: "Scrape first, OCR as fallback",
-          detail: "A scraper reads the YouTube description, and Tesseract.js OCR or pasted text covers everything else, running fully locally.",
+          solution: "Scrape first, paste as fallback",
+          detail: "A scraper reads the YouTube description automatically. When there’s no tracklist there, you can paste one from anywhere: timestamps, numbered lists, or plain lines all work.",
         },
         {
           insight: "Korean apps split title and artist",
@@ -139,7 +145,7 @@ const projects: Project[] = [
         },
       ],
       reflection:
-        "Getting OCR to run inside a Manifest V3 extension took way longer than I expected. I also stopped trying to make the parser perfect once I added the swap button. Letting people fix a row is faster than guessing right every time.",
+        "I also tried reading tracklists from screenshots with OCR, but Manifest V3’s security rules made it unreliable, so I shipped copy and paste as the fallback instead. Same with the parser: once I added the swap button, I stopped trying to make it perfect. Letting people fix a row is faster than guessing right every time.",
     },
   },  {
     id: "filmedhere",
@@ -412,7 +418,6 @@ const projects: Project[] = [
       "A cross-platform desktop app that ranks tasks automatically by deadline, urgency, and category.",
     cover: "smarttodo.png",
     tone: "lilac",
-    link: { label: "View on GitHub", href: "https://github.com/eileenhwang/SmartTodo" },
     tags: ["Electron", "JavaScript", "Desktop app", "UX"],
     sprint: {
       event: "Personal project · Desktop app",
@@ -454,7 +459,10 @@ const projects: Project[] = [
   },
 ];
 
-const filters = ["All work", "Product & design", "Engineering", "Designathon", "Hackathon"];
+const featuredIds = ["unetic", "clearcollab", "pathpilot", "audiolens"];
+const byId = (id: string) => projects.find((project) => project.id === id)!;
+const featuredProjects = featuredIds.map(byId);
+const moreProjects = projects.filter((project) => !featuredIds.includes(project.id));
 
 const experience = [
   {
@@ -720,7 +728,6 @@ function ProjectCard({
 }
 
 export default function App() {
-  const [filter, setFilter] = useState("All work");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
@@ -737,10 +744,6 @@ export default function App() {
     };
   }, [activeProject]);
 
-  const visibleProjects =
-    filter === "All work"
-      ? projects
-      : projects.filter((project) => project.category === filter);
 
   return (
     <main className="browser">
@@ -833,26 +836,29 @@ export default function App() {
             <span className="section-number">Projects</span>
             <h2>Things I’ve designed and built</h2>
           </div>
-          <p>A startup, a few side projects, and the designathons and hackathon where I learned the most.</p>
+          <p>A startup, a designathon, a hackathon, and something I built on my own. More below.</p>
         </div>
 
-        <div className="filters" role="group" aria-label="Filter projects">
-          {filters.map((item) => (
-            <button
-              key={item}
-              className={filter === item ? "active" : ""}
-              onClick={() => setFilter(item)}
-              aria-pressed={filter === item}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        <div className={`project-grid${visibleProjects.length % 2 ? " odd" : ""}`}>
-          {visibleProjects.map((project, index) => (
+        <div className={`project-grid${featuredProjects.length % 2 ? " odd" : ""}`}>
+          {featuredProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} onOpen={setActiveProject} />
           ))}
+        </div>
+
+        <div className="more-projects">
+          <h3>More projects</h3>
+          <ul>
+            {moreProjects.map((project) => (
+              <li key={project.id}>
+                <button onClick={() => setActiveProject(project)}>
+                  <span className="more-name">{project.title.split(", ")[0]}</span>
+                  <span className="more-tagline">{project.title.split(", ").slice(1).join(", ")}</span>
+                  <span className="more-meta">{project.category} · {project.year}</span>
+                  <ArrowIcon diagonal />
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -923,10 +929,24 @@ export default function App() {
               {activeProject.stat && (
                 <div className="case-metric"><strong>{activeProject.stat.value}</strong><span>{activeProject.stat.label}</span></div>
               )}
-              {activeProject.link && (
-                <a className="case-link" href={activeProject.link.href} target="_blank" rel="noreferrer">
-                  {activeProject.link.label} <ArrowIcon diagonal />
-                </a>
+              {(activeProject.link || activeProject.storeLink) && (
+                <div className="case-links">
+                  {activeProject.link && (
+                    <a className="case-link" href={activeProject.link.href} target="_blank" rel="noreferrer">
+                      {activeProject.link.label} <ArrowIcon diagonal />
+                    </a>
+                  )}
+                  {activeProject.storeLink &&
+                    (activeProject.storeLink.href ? (
+                      <a className="case-link" href={activeProject.storeLink.href} target="_blank" rel="noreferrer">
+                        {activeProject.storeLink.label} <ArrowIcon diagonal />
+                      </a>
+                    ) : (
+                      <span className="case-link case-link-pending">
+                        {activeProject.storeLink.label} <em>Coming soon</em>
+                      </span>
+                    ))}
+                </div>
               )}
             </div>
             <ProjectVisual project={activeProject} />
