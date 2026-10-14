@@ -729,6 +729,26 @@ function ProjectCard({
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [section, setSection] = useState("");
+
+  useEffect(() => {
+    const sections: [string, string][] = [
+      ["about", "about"],
+      ["work", "projects"],
+      ["experience", "experience"],
+    ];
+    const update = () => {
+      let current = "";
+      for (const [id, path] of sections) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 140) current = path;
+      }
+      setSection(current);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -756,7 +776,7 @@ export default function App() {
         </div>
         <div className="url-pill">
           <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
-          allaboutme.com{activeProject ? `/${activeProject.id}` : ""}
+          allaboutme{section ? `/${section}` : ""}
         </div>
         <span className="browser-bar-spacer" aria-hidden="true" />
       </div>
