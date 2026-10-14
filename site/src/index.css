@@ -171,7 +171,6 @@ svg {
   font-size: clamp(16px, 1.4vw, 20px);
   line-height: 1.55;
   margin: 0;
-  max-width: 620px;
 }
 
 .circle-link {
