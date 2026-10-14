@@ -20,6 +20,7 @@ type Sprint = {
   solutions: { insight: string; solution: string; detail: string; image?: string }[];
   solutionsLabel?: string;
   reflection: string;
+  reflectionLabel?: string;
 };
 
 type Project = {
@@ -88,8 +89,9 @@ const projects: Project[] = [
           detail: "Only verified Berkeley students can access and manage club information, keeping the community secure and trustworthy.",
         },
       ],
+      reflectionLabel: "Outcome",
       reflection:
-        "I was the PM, the designer, and a front-end dev on this one, so I felt every decision twice: once in Figma and again in the code. If we keep going, event planning tools and club suggestions are next on the list.",
+        "Unetic placed 1st in the Korean Startup Competition. Students told us the club search was easy to navigate and that verification made them trust what they found, which led to more students joining club activities. Next up: event planning tools, integration with campus systems, and club suggestions based on each student’s interests.",
     },
   },  {
     id: "audiolens",
@@ -689,7 +691,7 @@ function SprintStory({ sprint, name }: { sprint: Sprint; name: string }) {
       </section>
 
       <section className="sprint-step">
-        <div className="step-label"><b>05</b>Reflection</div>
+        <div className="step-label"><b>05</b>{sprint.reflectionLabel ?? "Reflection"}</div>
         <div className="step-body">
           <p className="reflection">{sprint.reflection}</p>
         </div>
