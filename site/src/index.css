@@ -160,18 +160,18 @@ svg {
 }
 
 .hero-bottom {
-  align-items: flex-end;
+  align-items: center;
   display: flex;
-  gap: 40px;
-  justify-content: space-between;
-  margin: 52px 0 75px 39%;
+  gap: 32px;
+  justify-content: flex-start;
+  margin: 36px 0 64px;
 }
 
 .hero-bottom p {
-  font-size: clamp(16px, 1.6vw, 22px);
+  font-size: clamp(16px, 1.4vw, 20px);
   line-height: 1.55;
   margin: 0;
-  max-width: 560px;
+  max-width: 620px;
 }
 
 .circle-link {
