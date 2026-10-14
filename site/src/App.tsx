@@ -30,7 +30,7 @@ type Project = {
   year: string;
   role: string;
   summary: string;
-  stat?: { value: string; label: string };
+  stats?: { value: string; label: string }[];
   cover: string;
   tone: "blue" | "coral" | "acid" | "lilac" | "ink";
   link?: { label: string; href: string };
@@ -44,23 +44,27 @@ const projects: Project[] = [
     id: "unetic",
     title: "Unetic, one home for every campus club",
     category: "Product & design",
-    year: "Startup",
-    role: "Product manager · UI/UX · Front-end",
+    year: "2024 · Acquired",
+    role: "Co-founder · Product & front-end",
     summary:
-      "A web platform that centralizes verified club information so students can discover, join, and engage with university organizations without the friction.",
-    stat: { value: "1st", label: "Korean Startup Competition" },
+      "A campus platform I co-founded that centralizes verified club information, so Berkeley students can discover, join, and engage with clubs without the friction. It grew to 3,000+ active students and was acquired by Sideshift.",
+    stats: [
+      { value: "3,000+", label: "active student users" },
+      { value: "+50%", label: "engagement from iterative launches" },
+      { value: "1st", label: "Korean Startup Competition" },
+    ],
     cover: "unetic.png",
     tone: "blue",
     link: { label: "Visit unetic.org", href: "https://unetic.org" },
     tags: ["Product management", "User research", "UI/UX", "Front-end"],
     sprint: {
-      event: "Startup · 1st place, Korean Startup Competition",
+      event: "Co-founder · Feb – Dec 2024 · Acquired by Sideshift",
       hmw: "How might we help students find the right campus club, and trust what they find, without digging through scattered sources?",
       context:
         "Club information lived across flyers, group chats, and outdated pages. Students struggled to find organizations that matched their interests, and club leaders had no single place to recruit, manage members, and communicate. Because anyone could post anything, trust was part of the problem too.",
       research: {
         method:
-          "As a Golden Bear Orientation (GBO) leader, I surveyed incoming freshmen and transfer students at Berkeley about how they find and join clubs. I followed up with user testing sessions and iterated on multiple prototypes using their feedback.",
+          "As a Golden Bear Orientation (GBO) leader, I surveyed incoming freshmen and transfer students at Berkeley about how they find and join clubs. I followed up with usability testing, user interviews, and journey mapping to find the biggest pain points, then iterated on multiple prototypes using their feedback.",
         stats: [
           { value: "80%", label: "of freshmen and transfers didn’t know what to look for, because club resources were scattered everywhere" },
         ],
@@ -91,7 +95,7 @@ const projects: Project[] = [
       ],
       reflectionLabel: "Outcome",
       reflection:
-        "Unetic placed 1st in the Korean Startup Competition. Students told us the club search was easy to navigate and that verification made them trust what they found, which led to more students joining club activities. Next up: event planning tools, integration with campus systems, and club suggestions based on each student’s interests.",
+        "Unetic grew to 3,000+ active student users, and engagement rose 50% through iterative feature launches and continuous user feedback. Working with engineers, designers, and student stakeholders, I defined success metrics and sequenced releases by user impact and technical feasibility. Unetic placed 1st in the Korean Startup Competition and was acquired by Sideshift.",
     },
   },  {
     id: "audiolens",
@@ -101,7 +105,7 @@ const projects: Project[] = [
     role: "Solo builder",
     summary:
       "A Chrome extension that detects timestamped tracklists in YouTube videos and turns them into Spotify playlists. If there’s no tracklist in the description, you can paste one in.",
-    stat: { value: "EN + KR", label: "tracklist formats supported" },
+    stats: [{ value: "EN + KR", label: "tracklist formats supported" }],
     cover: "audiolens.png",
     tone: "acid",
     link: { label: "View on GitHub", href: "https://github.com/dbswjd24/audiolens" },
@@ -157,7 +161,7 @@ const projects: Project[] = [
     role: "Solo builder",
     summary:
       "An interactive map of real filming locations from movies and TV. Click a pin to see the poster, cast, rating, and the exact scene shot there.",
-    stat: { value: "34", label: "hand-verified filming locations" },
+    stats: [{ value: "34", label: "hand-verified filming locations" }],
     cover: "filmedhere.jpg",
     tone: "ink",
     link: { label: "Visit the site", href: "https://filmed-here.vercel.app" },
@@ -499,6 +503,17 @@ const experience = [
       "Coordinated daily with engineering and design teams to deliver patient-centric improvements on schedule, boosting overall product satisfaction",
     ],
     highlights: ["0→1 launch", "Healthcare", "Requirements"],
+  },
+  {
+    company: "Unetic",
+    role: "Co-Founder · Acquired by Sideshift",
+    period: "Feb – Dec 2024",
+    bullets: [
+      "Co-founded a campus platform that grew to 3,000+ active student users, leading product strategy, roadmap planning, and frontend development while increasing engagement by 50% through iterative feature launches and continuous user feedback",
+      "Conducted usability testing, user interviews, and journey mapping to identify customer pain points, prioritize product opportunities, and inform roadmap decisions through structured user research and behavioral insights",
+      "Collaborated with engineers, designers, and student stakeholders to define success metrics, prioritize product launches, and sequence releases based on user impact, technical feasibility, and long-term product goals",
+    ],
+    highlights: ["Founder", "3,000+ users", "Acquired"],
   },
 ];
 
@@ -948,8 +963,12 @@ export default function App() {
                 {activeProject.sprint.event}
                 {activeProject.sprint.team && <><br />Team: {activeProject.sprint.team}</>}
               </p>
-              {activeProject.stat && (
-                <div className="case-metric"><strong>{activeProject.stat.value}</strong><span>{activeProject.stat.label}</span></div>
+              {activeProject.stats && (
+                <div className="case-metrics">
+                  {activeProject.stats.map((stat) => (
+                    <div className="case-metric" key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span></div>
+                  ))}
+                </div>
               )}
               {(activeProject.link || activeProject.storeLink) && (
                 <div className="case-links">
