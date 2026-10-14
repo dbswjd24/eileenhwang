@@ -483,14 +483,14 @@ const experience = [
   },
   {
     company: "Dorsal.fyi",
-    role: "Founding Product Manager",
+    role: "Founding Product Manager · Acquired by Promise",
     period: "May – Aug 2025",
     bullets: [
-      "Spearheaded design and launch of a billing comparison tool that empowered patients to better understand medical costs",
-      "Defined clear requirements and prioritized features for insurance dispute workflows based on user feedback and support data",
-      "Coordinated daily with engineering and design teams to deliver patient-centric improvements on schedule, boosting overall product satisfaction",
+      "Led the design and launch of a healthcare billing comparison platform, owning the product roadmap, feature prioritization, and cross-functional execution to improve pricing transparency and CRM integration workflows for healthcare providers",
+      "Defined product requirements for insurance dispute workflows through user research, customer interviews, and support data analysis, translating insights into detailed PRDs aligned with business objectives and customer needs",
+      "Partnered closely with engineering and design teams throughout development, balancing technical tradeoffs, refining product requirements, and delivering patient-first experiences while maintaining product delivery timelines from concept to launch",
     ],
-    highlights: ["0→1 launch", "Healthcare", "Requirements"],
+    highlights: ["0→1 launch", "Healthcare", "Acquired"],
   },
   {
     company: "Unetic",
@@ -894,8 +894,8 @@ export default function App() {
           <span className="section-number">Experience</span>
           <h2>Where I’ve worked</h2>
           <p>
-            From AI workflow strategy at Adobe to launching patient-facing tools at Dorsal, I work
-            where product, design, and engineering meet.
+            Two startups I helped build, Unetic and Dorsal, were acquired. Most recently, I worked on
+            AI workflow strategy at Adobe.
           </p>
         </div>
         <div className="experience-list">
