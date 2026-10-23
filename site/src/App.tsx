@@ -461,7 +461,7 @@ const moreProjects = projects.filter((project) => !featuredIds.includes(project.
 const experience = [
   {
     company: "Adobe",
-    role: "Senior Product Consultant",
+    role: "Product Manager",
     period: "Sep – Dec 2025",
     bullets: [
       "Architected an AI-driven strategy for Adobe’s SDLC to streamline cross-functional collaboration and handoffs across product, design, and engineering teams",
